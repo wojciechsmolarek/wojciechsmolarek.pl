@@ -8,7 +8,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/static";
 
 // https://astro.build/config
 export default defineConfig({
@@ -47,7 +47,6 @@ export default defineConfig({
 
   output: "hybrid",
   adapter: vercel({
-    edgeMiddleware: true,
     isr: true,
     webAnalytics: {
       enabled: true,
