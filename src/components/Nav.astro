@@ -50,7 +50,9 @@ const navItems = {
     setTheme(newTheme);
   }
 
-  document
-    .getElementById("theme-toggle")
-    .addEventListener("click", toggleTheme);
+  document.addEventListener("astro:page-load", () => {
+    document
+      .getElementById("theme-toggle")
+      .addEventListener("click", toggleTheme);
+  });
 </script>

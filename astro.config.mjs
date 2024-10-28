@@ -45,7 +45,13 @@ export default defineConfig({
     react({
       experimentalReactChildren: true,
     }),
-    icon(),
+    icon({
+      include: {
+        "fa6-solid": ["rss", "circle-half-stroke"],
+        tabler: ["mail-filled"],
+        "fa6-brands": ["x-twitter", "github", "instagram", "linkedin-in"],
+      },
+    }),
     sitemap(),
   ],
 
