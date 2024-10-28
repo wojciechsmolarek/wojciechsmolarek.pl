@@ -1,22 +1,15 @@
 ---
-import {
-  FaXTwitter,
-  FaGithub,
-  FaInstagram,
-  FaRss,
-  FaLinkedinIn,
-} from "react-icons/fa6";
-import { TbMailFilled } from "react-icons/tb";
 import { metaData, socialLinks } from "../config";
+import { Icon } from "astro-icon/components";
 
 const YEAR = new Date().getFullYear();
 
 const socialIcons = [
-  { href: socialLinks.twitter, icon: FaXTwitter },
-  { href: socialLinks.github, icon: FaGithub },
-  { href: socialLinks.instagram, icon: FaInstagram },
-  { href: socialLinks.linkedin, icon: FaLinkedinIn },
-  { href: socialLinks.email, icon: TbMailFilled },
+  { href: socialLinks.twitter, icon: "fa6-brands:x-twitter" },
+  { href: socialLinks.github, icon: "fa6-brands:github" },
+  { href: socialLinks.instagram, icon: "fa6-brands:instagram" },
+  { href: socialLinks.linkedin, icon: "fa6-brands:linkedin-in" },
+  { href: socialLinks.email, icon: "tabler:mail-filled" },
 ];
 ---
 
@@ -31,13 +24,15 @@ const socialIcons = [
   </a>
   <div
     class="flex text-lg gap-3.5 float-right transition-opacity duration-300 hover:opacity-90">
-    {socialIcons.map((link) => (
-      <a href={link.href} target="_blank" rel="noopener noreferrer">
-        <link.icon />
-      </a>
-    ))}
+    {
+      socialIcons.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          <Icon name={link.icon} />
+        </a>
+      ))
+    }
     <a href="/rss.xml" target="_self">
-      <FaRss />
+      <Icon name="fa6-solid:rss" />
     </a>
   </div>
 </small>

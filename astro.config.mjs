@@ -10,6 +10,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import vercel from "@astrojs/vercel/static";
 
+import icon from "astro-icon";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://astrofolio-mu.vercel.app",
@@ -43,6 +45,8 @@ export default defineConfig({
     react({
       experimentalReactChildren: true,
     }),
+    icon(),
+    sitemap(),
   ],
 
   output: "static",

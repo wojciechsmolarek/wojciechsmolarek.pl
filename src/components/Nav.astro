@@ -1,6 +1,6 @@
 ---
 import { metaData } from "../config";
-import { FaCircleHalfStroke } from "react-icons/fa6";
+import { Icon } from "astro-icon/components";
 
 const navItems = {
   "/blog": { name: "Blog" },
@@ -30,8 +30,9 @@ const navItems = {
         id="theme-toggle"
         aria-label="Toggle theme"
         class="flex items-center justify-center transition-opacity duration-300 hover:opacity-90">
-        <FaCircleHalfStroke
-          className="h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4]"
+        <Icon
+          name="fa6-solid:circle-half-stroke"
+          class="h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4]"
         />
       </button>
     </div>
