@@ -1,18 +1,18 @@
 ---
 title: "Custom MDX Examples"
 publishedAt: "2024-08-11"
-summary: "Nextfolio custom MDX examples."
+summary: "Astrofolio custom MDX examples."
 tags: "Custom MDX, Web development"
 ---
 import { Image } from "astro:assets";
-import ImageGrid from "../../components/mdx/ImageGrid.astro";
 import Tweet from "astro-tweet";
 import { YouTube } from '@astro-community/astro-embed-youtube';
+import ImageGrid from "../../components/mdx/ImageGrid.astro";
 import Caption from "../../components/mdx/Caption.astro";
 import Table from "../../components/mdx/Table.astro";
 import Callout from "../../components/mdx/Callout.astro";
 
-Nextfolio uses [custom MDX](https://github.com/1msirius/Nextfolio/blob/main/app/components/mdx.tsx) for blog posts, making it easy to include JSX components such as interactive embeds, charts, or alerts directly in your markdown content.
+Astrofolio uses [custom MDX](https://github.com/vikas5914/Astrofolio/blob/main/src/components/mdx) for blog posts, making it easy to include JSX components such as interactive embeds, charts, or alerts directly in your markdown content.
 
 Here are some examples of using MDX:
 
@@ -38,8 +38,8 @@ _This is italic text_
 
 ## Links
 
-- Nextfolio is built with [Next.js](https://nextjs.org).
-- Nextfolio uses [pnpm](https://pnpm.io/) for package management.
+- Astrofolio is built with [Astro](https://astro.build/).
+- Astrofolio uses [bun](https://bun.sh/) for package management.
 
 ## CodeBlocks
 
@@ -54,7 +54,7 @@ export default function HelloWorld() {
 
 ## Images
 
-Nextfolio uses [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization) in MDX for seamless image rendering:
+Astrofolio uses [Astro Image](https://docs.astro.build/en/guides/images/) in MDX for seamless image rendering:
 
 ```jsx
 <Image
@@ -76,7 +76,7 @@ Renders:
 
 ## Image Grid
 
-Nextfolio uses a custom [image grid component](https://github.com/1msirius/Nextfolio/blob/main/app/components/image-grid.tsx) to display image galleries.
+Astrofolio uses a custom [image grid component](https://github.com/vikas5914/Astrofolio/blob/main/src/components/mdx/ImageGrid.astro) to display image galleries.
 
 ```jsx
 <ImageGrid
@@ -104,10 +104,10 @@ Renders:
 
 ### Tweets
 
-Nextfolio uses [react-tweet](https://react-tweet.vercel.app/) to embed tweets in MDX posts.
+Astrofolio uses [astro-tweet](https://github.com/tsriram/astro-tweet/) to embed tweets in MDX posts.
 
 ```jsx
-<ReactTweet id="1617979122625712128" />
+<Tweet id="1617979122625712128" />
 ```
 
 Renders:
@@ -121,7 +121,7 @@ Renders:
 
 ### YouTube Videos
 
-Nextfolio uses [react-youtube](https://www.npmjs.com/package/react-youtube) to embed YouTube videos in MDX posts.
+Astrofolio uses [astro-embed](https://astro-embed.netlify.app/) to embed YouTube videos in MDX posts.
 
 ```jsx
 <YouTube id="wXhTHyIgQ_U" />
@@ -133,7 +133,7 @@ Renders:
 
 ### Captions
 
-Nextfolio uses [react-wrap-balancer](https://react-wrap-balancer.vercel.app/) to evenly balance captions in MDX posts.
+Astrofolio uses [react-wrap-balancer](https://react-wrap-balancer.vercel.app/) to evenly balance captions in MDX posts.
 
 ```jsx
 <Caption>
@@ -151,7 +151,7 @@ Renders:
 
 ## Tables
 
-Nextfolio uses a custom [table component](https://github.com/1msirius/Nextfolio/blob/main/app/components/mdx.tsx#L38) to render tables in MDX posts.
+Astrofolio uses a custom [table component](https://github.com/vikas5914/Astrofolio/blob/main/src/components/mdx/Table.astro) to render tables in MDX posts.
 
 ```jsx
 <Table
@@ -191,7 +191,7 @@ Renders:
 
 ## Math Expressions
 
-Nextfolio allows you to render mathematical expressions in MDX posts using [KaTeX](https://katex.org/) . Simply wrap your expression in **$** to include KaTeX within your MDX content.
+Astrofolio allows you to render mathematical expressions in MDX posts using [KaTeX](https://katex.org/) . Simply wrap your expression in **$** to include KaTeX within your MDX content.
 
 ```
 $
@@ -207,17 +207,16 @@ $
 
 ## Callout
 
-Nextfolio uses a custom [callout component](https://github.com/1msirius/Nextfolio/blob/main/app/components/mdx.tsx#L63) to render important information in MDX posts.
+Astrofolio uses a custom [callout component](https://github.com/vikas5914/Astrofolio/blob/main/src/components/mdx/Callout.astro) to render important information in MDX posts.
 
 ```jsx
 <Callout emoji="💡">
-[Nextfolio](https://nextfolio.site) is a clean, simple, and fast portfolio built with Next.js, Tailwind CSS, and pnpm for optimal performance.
+  [Astrofolio](https://astrofolio-mu.vercel.app/) is a clean, simple, and fast portfolio built with Astro, Tailwind CSS, and bun for optimal performance.
 </Callout>
 ```
 
 Renders:
 
 <Callout emoji="💡">
-  [Nextfolio](https://nextfolio.site) is a clean, simple, and fast portfolio
-  built with Next.js, Tailwind CSS, and pnpm for optimal performance.
+  [Astrofolio](https://astrofolio-mu.vercel.app/) is a clean, simple, and fast portfolio built with Astro, Tailwind CSS, and bun for optimal performance.
 </Callout>
