@@ -45,8 +45,9 @@ export default defineConfig({
     }),
   ],
 
-  output: "server",
+  output: "hybrid",
   adapter: vercel({
+    edgeMiddleware: true,
     isr: true,
     webAnalytics: {
       enabled: true,
