@@ -1,5 +1,5 @@
 export const metaData = {
-  baseUrl: "https://astrofolio-mu.vercel.app/",
+  baseUrl: "https://astrofolio-astro.vercel.app/",
   title: "Astrofolio",
   name: "Vikas",
   ogImage: "/opengraph-image.png",
