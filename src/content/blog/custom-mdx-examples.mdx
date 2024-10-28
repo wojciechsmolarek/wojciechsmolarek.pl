@@ -4,7 +4,7 @@ publishedAt: "2024-08-11"
 summary: "Nextfolio custom MDX examples."
 tags: "Custom MDX, Web development"
 ---
-
+import { Image } from "astro:assets";
 import ImageGrid from "../../components/mdx/ImageGrid.astro";
 import Tweet from "astro-tweet";
 import { YouTube } from 'astro-embed';
@@ -57,7 +57,7 @@ export default function HelloWorld() {
 Nextfolio uses [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization) in MDX for seamless image rendering:
 
 ```jsx
-<img
+<Image
   src="/opengraph-image.png"
   alt="OpenGraph image"
   width={640}
@@ -67,7 +67,7 @@ Nextfolio uses [Next.js Image](https://nextjs.org/docs/basic-features/image-opti
 
 Renders:
 
-<img
+<Image
   src="/opengraph-image.png"
   alt="OpenGraph image"
   width={640}
