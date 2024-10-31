@@ -80,5 +80,6 @@ export default defineConfig({
       enabled: true,
     },
     imageService: true,
+    devImageService: "squoosh",
   }),
 });
