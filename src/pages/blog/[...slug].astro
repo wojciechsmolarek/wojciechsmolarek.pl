@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import "katex/dist/katex.min.css";
+import { metaData } from "../../config";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -13,12 +14,15 @@ export async function getStaticPaths() {
 }
 type Props = CollectionEntry<"blog">;
 
+import { getImagePath } from "astro-opengraph-images";
 const post = Astro.props;
+const { url, site } = Astro;
+const openGraphImageUrl = getImagePath({ url, site });
 
 const { Content } = await post.render();
 ---
 
-<Base>
+<Base title={post.data.title} description={post.data.summary}>
   <section>
     <script
       type="application/ld+json"
@@ -29,13 +33,11 @@ const { Content } = await post.render();
         datePublished: post.data.publishedAt,
         dateModified: post.data.publishedAt,
         description: post.data.summary,
-        image: post.data.heroImage
-          ? `${post.data.heroImage}`
-          : `/og?title=${encodeURIComponent(post.data.title)}`,
-        url: `/blog/${post.slug}`,
+        image: openGraphImageUrl,
+        url: url,
         author: {
           "@type": "Person",
-          name: import.meta.env.SITE_NAME,
+          name: metaData.name,
         },
       })}
     />

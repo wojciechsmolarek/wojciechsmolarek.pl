@@ -7,10 +7,9 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
 import vercel from "@astrojs/vercel/static";
-
 import icon from "astro-icon";
+import opengraphImages, { presets } from "astro-opengraph-images";
 
 // https://astro.build/config
 export default defineConfig({
@@ -53,14 +52,29 @@ export default defineConfig({
       },
     }),
     sitemap(),
+    opengraphImages({
+      render: presets.waveSvg,
+      options: {
+        fonts: [
+          {
+            name: "Roboto",
+            name: "Roboto",
+            name: "Roboto",
+            weight: 400,
+            style: "normal",
+            data: fs.readFileSync(
+              "node_modules/@fontsource/roboto/files/roboto-latin-400-normal.woff"
+            ),
+          },
+        ],
+      },
+    }),
   ],
-
   output: "static",
   adapter: vercel({
-    isr: true,
     webAnalytics: {
       enabled: true,
     },
-    imageService: true,
+    imageService: false,
   }),
 });
