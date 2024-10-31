@@ -53,5 +53,8 @@
   },
   "trustedDependencies": [
     "@vercel/speed-insights"
-  ]
+  ],
+  "patchedDependencies": {
+    "astro-opengraph-images@1.11.6": "patches/astro-opengraph-images@1.11.6.patch"
+  }
 }
