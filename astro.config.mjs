@@ -16,6 +16,10 @@ export default defineConfig({
   site: "https://astrofolio-astro.vercel.app",
   integrations: [
     mdx({
+      image: {
+        domains: ["unsplash.com"],
+      },
+      optimize: true,
       shikiConfig: {
         themes: {
           light: "github-light",
