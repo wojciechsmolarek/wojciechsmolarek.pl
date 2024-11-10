@@ -30,7 +30,7 @@
     "astro-tweet": "^0.0.4",
     "katex": "^0.16.11",
     "lenis": "^1.1.14",
-    "mdx": "^0.3.1",
+    "mdx": "^0.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-wrap-balancer": "^1.1.1",
