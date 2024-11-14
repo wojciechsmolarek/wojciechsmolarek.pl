@@ -3,6 +3,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  robots?: string;
 }
 
 import Themes from "astro-themes";
@@ -18,14 +19,14 @@ import "@fontsource/geist-mono/400.css";
 import "@fontsource/geist-mono/600.css";
 import "@styles/global.css";
 
-const { title, description, image } = Astro.props;
+const { title, description, image, robots } = Astro.props;
 ---
 
 <html lang="pl" class="scrollbar-hide lenis lenis-smooth">
   <head>
     <ViewTransitions />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content={robots || "index, follow"}>
     <Themes />
     <BaseHead title={title} description={description} image={image} />
     <link
