@@ -4,9 +4,11 @@ import Base from "../../layouts/Base.astro";
 
 const title = "Photos";
 const description = "My Photos";
+const robots = "noindex, follow";
+
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} robots={robots}>
   <section>
     <h1 class="mb-8 text-2xl font-medium tracking-tight">Photos</h1>
     <ImageGrid
