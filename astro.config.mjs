@@ -14,6 +14,7 @@ import opengraphImages, { presets } from "astro-opengraph-images";
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.wojciechsmolarek.pl/",
+  trailingSlash: 'never',
   integrations: [
     mdx({
       image: {
