@@ -1,7 +1,7 @@
 export const metaData = {
   baseUrl: "https://www.wojciechsmolarek.pl/",
-  title: "WojciechSmolarek.pl",
-  name: "Wojciech",
+  title: "Wojciech Smolarek",
+  name: "Wojciech Smolarek",
   ogImage: "/opengraph-image.png",
   description:
     "",
