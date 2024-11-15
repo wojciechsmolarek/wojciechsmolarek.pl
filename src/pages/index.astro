@@ -1,9 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
 import { Image } from "astro:assets";
+
+const title = "Technical SEO Specialist, Freelancer SEO";
+const description = "Potrzebujesz wsparcia w technicznym SEO? Jako freelancer SEO, pomogę Ci zoptymalizować stronę, poprawić widoczność i zwiększyć ruch organiczny. Sprawdź, jak mogę wesprzeć Twój biznes!";
 ---
 
-<Base>
+<Base title={title} description={description}>
   <section>
       <Image
         src="/profile-photo.jpg"
