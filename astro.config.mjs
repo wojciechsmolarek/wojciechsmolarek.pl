@@ -44,7 +44,12 @@ export default defineConfig({
       ],
       gfm: true,
     }),
-    sitemap(),
+    sitemap({
+      filter: (page) => {
+        const noIndexPages = ['/photos']; 
+        return !noIndexPages.includes(page);
+      },
+    }),
     tailwind(),
     react({
       experimentalReactChildren: true,
