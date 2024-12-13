@@ -12,28 +12,26 @@ const socialIcons = [
 ];
 ---
 
-<small class="block lg:mt-24 mt-16 text-[#1C1C1C] dark:text-[#D4D4D4]">
-  <time>© {YEAR}</time>{" "}
-  <span>
-    {metaData.title}
-  </span>
-  <div
-    class="flex text-lg gap-3.5 float-right transition-opacity duration-300 hover:opacity-90">
-    {
-      socialIcons.map((link) => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer">
-          <Icon name={link.icon} />
-        </a>
-      ))
-    }
-  </div>
-</small>
+<footer class="mt-16 lg:mt-24 text-gray-800 dark:text-gray-300 relative">
+    <small class="block">
+    <span aria-label="Year">© {YEAR}</span>
+    {" "}
+    <span>
+      <a href="/" aria-label="Link do strony głównej" rel="home">{metaData.title}</a>
+    </span>
+      </small>
 
-<style>
-  @media screen and (max-width: 480px) {
-    article {
-      padding-top: 2rem;
-      padding-bottom: 4rem;
-    }
-  }
-</style>
+    <nav class="float-right">
+        <ul class="flex text-lg gap-3.5 transition-opacity duration-300 hover:opacity-90">
+        {
+            socialIcons.map((link) => (
+                <li class="m-0 p-0">
+                   <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.href.includes("github") ? "Profil na GitHub" : link.href.includes("instagram") ? "Profil na Instagram" : link.href.includes("linkedin") ? "Profil na LinkedIn" : "Wyślij wiadomość na Email" }>
+                    <Icon name={link.icon} />
+                    </a>
+                </li>
+            ))
+        }
+        </ul>
+    </nav>
+</footer>
