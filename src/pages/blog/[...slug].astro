@@ -41,11 +41,11 @@ const formattedDate = formatDate(post.data.publishedAt);
       datePublished: post.data.publishedAt.toISOString(),
        dateModified: post.data.publishedAt.toISOString(),
        description: post.data.summary,
-       image: openGraphImageUrl,
       url: url,
       author: {
         "@type": "Person",
         name: metaData.name,
+        url: "https://www.wojciechsmolarek.pl/"
       },
     })}
   />
