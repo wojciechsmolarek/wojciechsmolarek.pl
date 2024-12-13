@@ -16,38 +16,35 @@ const navItems = {
     "/photos": { name: "Kontakt" },
 };
 ---
-<nav class="lg:mb-16 mb-12 py-5">
-    <div class="flex md:flex-row md:items-center justify-between">
+<nav class="lg:mb-16 mb-12 py-5" aria-label="Main Navigation">
+    <div class="flex flex-col md:flex-row md:items-center justify-between">
         <div class="flex items-center">
-            <a href="/" class="text-3xl font-semibold">
+            <a href="/" class="text-3xl font-semibold" aria-label="Homepage">
                 {metaData.title}
             </a>
         </div>
-
-        <div class="flex md:hidden ml-auto items-center">
-             <button id="hamburger-menu" class="focus:outline-none flex items-center">
-                  <Icon name="fa6-solid:bars" class="h-6 w-6 text-[#1c1c1c] dark:text-[#D4D4D4] mr-2"/>
-                  MENU
-            </button>
-        </div>
-
-        <div class="nav-items hidden md:flex flex-col md:flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center" id="nav-items">
+        <div class="flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center">
             {
                 Object.entries(navItems).map(([key, item]) => {
                   if (item.items) {
                     return (
-                      <div class="relative">
-                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative dropdown-button"
+                      <div class="relative" key={key}>
+                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
                           aria-haspopup="true"
                           aria-expanded="false"
+                          aria-label={`Open ${item.name} menu`}
                         >
                           {item.name}
-                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" />
+                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4]" aria-hidden="true" />
                         </button>
-                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg dropdown-menu top-full left-0 w-full md:w-auto">
-                          {item.items.map((subItem) => (
-                            <li>
-                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap w-full">
+                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg"
+                            aria-label={`${item.name} submenu`}
+                        >
+                          {item.items.map((subItem, index) => (
+                            <li key={index}>
+                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    aria-label={`Go to ${subItem.name}`}
+                                >
                                     {subItem.name}
                                 </a>
                              </li>
@@ -57,7 +54,7 @@ const navItems = {
                     );
                   } else {
                     return (
-                        <a href={key} class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative">
+                        <a href={key} class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative" aria-label={`Go to ${item.name}`} key={key}>
                             {item.name}
                         </a>
                     );
@@ -71,6 +68,7 @@ const navItems = {
                 <Icon
                     name="fa6-solid:circle-half-stroke"
                     class="h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4]"
+                     aria-hidden="true"
                 />
             </button>
         </div>
@@ -80,64 +78,44 @@ const navItems = {
     function setTheme(theme) {
         document.dispatchEvent(new CustomEvent("set-theme", { detail: theme }));
     }
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+}
 
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        setTheme(newTheme);
-    }
 
+document.addEventListener("astro:page-load", () => {
+    document
+        .getElementById("theme-toggle")
+        .addEventListener("click", toggleTheme);
+    const dropdownButtons = document.querySelectorAll('nav button[aria-haspopup="true"]');
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const dropdown = button.nextElementSibling;
+             const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-    document.addEventListener("astro:page-load", () => {
-        document
-            .getElementById("theme-toggle")
-            .addEventListener("click", toggleTheme);
-
-        // Mobile menu toggle
-        const hamburgerButton = document.getElementById('hamburger-menu');
-        const navItems = document.querySelector('.nav-items');
-        hamburgerButton.addEventListener('click', () => {
-             navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+            if(isExpanded){
+                button.setAttribute('aria-expanded', 'false');
+                dropdown.classList.add('hidden');
+            } else {
+                button.setAttribute('aria-expanded', 'true');
+                dropdown.classList.remove('hidden');
+            }
         });
-
-         //Dropdown functionality
-        const dropdownButtons = document.querySelectorAll('.dropdown-button');
-        dropdownButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                const dropdown = button.nextElementSibling;
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-                if(isExpanded){
-                    button.setAttribute('aria-expanded', 'false');
-                    dropdown.style.display = 'none';
-                } else {
-                    button.setAttribute('aria-expanded', 'true');
-                    dropdown.style.display = 'block';
-                }
-                 event.stopPropagation()
-            });
-        });
-
-         document.addEventListener('click', () => {
-                dropdownButtons.forEach(button => {
-                const dropdown = button.nextElementSibling;
-                if(button.getAttribute('aria-expanded') === 'true'){
-                     button.setAttribute('aria-expanded', 'false');
-                    dropdown.style.display = 'none';
-                }
-              });
-          });
-
-        // Adjust dropdown width to content
-        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-        dropdownMenus.forEach(menu => {
-            let maxWidth = 0;
-            menu.querySelectorAll('li a').forEach(item => {
-                const itemWidth = item.offsetWidth;
-                maxWidth = Math.max(maxWidth, itemWidth);
-            });
-            menu.style.width = `${maxWidth}px`;
-        });
-
     });
+
+     document.addEventListener('click', (event) => {
+        if (!event.target.closest('nav button[aria-haspopup="true"]')) {
+          document.querySelectorAll('nav button[aria-haspopup="true"]').forEach(button => {
+            const dropdown = button.nextElementSibling;
+            if(button.getAttribute('aria-expanded') === 'true'){
+                 button.setAttribute('aria-expanded', 'false');
+                dropdown.classList.add('hidden');
+            }
+          });
+        }
+      });
+});
+
 </script>
