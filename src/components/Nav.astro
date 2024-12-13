@@ -16,10 +16,10 @@ const navItems = {
     "/photos": { name: "Kontakt" },
 };
 ---
-<nav class="lg:mb-16 mb-12 py-5" aria-label="Main Navigation">
+<nav class="lg:mb-16 mb-12 py-5" aria-label="Menu główne">
     <div class="flex flex-col md:flex-row md:items-center justify-between">
         <div class="flex items-center">
-            <a href="/" class="text-3xl font-semibold" aria-label="Homepage">
+            <a href="/" class="text-3xl font-semibold" aria-label="Strona główna">
                 {metaData.title}
             </a>
         </div>
@@ -29,13 +29,13 @@ const navItems = {
                   if (item.items) {
                     return (
                       <div class="relative" key={key}>
-                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          aria-label={`Open ${item.name} menu`}
+                          aria-label={`Otwóz menu ${item.name}`}
                         >
                           {item.name}
-                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" aria-hidden="true" />
+                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" aria-hidden="true" />
                         </button>
                         <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg"
                             aria-label={`${item.name} submenu`}
@@ -43,7 +43,7 @@ const navItems = {
                           {item.items.map((subItem, index) => (
                             <li key={index}>
                                 <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                    aria-label={`Go to ${subItem.name}`}
+                                    aria-label={`Idź do ${subItem.name}`}
                                 >
                                     {subItem.name}
                                 </a>
@@ -54,7 +54,7 @@ const navItems = {
                     );
                   } else {
                     return (
-                        <a href={key} class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative" aria-label={`Go to ${item.name}`} key={key}>
+                        <a href={key} class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative" aria-label={`Idź do ${item.name}`} key={key}>
                             {item.name}
                         </a>
                     );
@@ -63,7 +63,7 @@ const navItems = {
             }
             <button
                 id="theme-toggle"
-                aria-label="Toggle theme"
+                aria-label="Zmień kolor motywu strony"
                 class="flex items-center justify-center transition-opacity duration-300 hover:opacity-90">
                 <Icon
                     name="fa6-solid:circle-half-stroke"
