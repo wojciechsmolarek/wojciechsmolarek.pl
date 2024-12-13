@@ -1,11 +1,21 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getCollection } from "astro:content";
+
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
 );
 const title = "Blog";
 const description = "Wojciech Smolarek Blog";
+
+const FormattedDate = ({ date, includeRelative }) => {
+    const formattedDate = new Date(date).toLocaleDateString('pl-PL', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  return formattedDate;
+};
 ---
 
 <Base title={title} description={description}>
