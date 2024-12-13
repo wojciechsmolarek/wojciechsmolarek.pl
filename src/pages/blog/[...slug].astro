@@ -1,7 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
 import "katex/dist/katex.min.css";
 import { metaData } from "../../config";
 
@@ -12,45 +11,55 @@ export async function getStaticPaths() {
     props: post,
   }));
 }
+
 type Props = CollectionEntry<"blog">;
 
 import { getImagePath } from "astro-opengraph-images";
 const post = Astro.props;
 const { url, site } = Astro;
 const openGraphImageUrl = getImagePath({ url, site });
-
 const { Content } = await post.render();
+
+const formatDate = (date: Date) => {
+  return new Date(date).toLocaleDateString("pl-PL", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+const formattedDate = formatDate(post.data.publishedAt);
 ---
 
 <Base title={post.data.title} description={post.data.summary}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.data.title,
+      datePublished: post.data.publishedAt.toISOString(),
+       dateModified: post.data.publishedAt.toISOString(),
+       description: post.data.summary,
+       image: openGraphImageUrl,
+      url: url,
+      author: {
+        "@type": "Person",
+        name: metaData.name,
+      },
+    })}
+  />
   <section>
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: post.data.title,
-        datePublished: post.data.publishedAt,
-        dateModified: post.data.publishedAt,
-        description: post.data.summary,
-        image: openGraphImageUrl,
-        url: url,
-        author: {
-          "@type": "Person",
-          name: metaData.name,
-        },
-      })}
-    />
     <h1 class="title mb-3 font-medium text-2xl tracking-tight">
-      {post.data.title}
+        {post.data.title}
     </h1>
-    <div class="flex justify-between items-center mt-2 mb-8 text-medium">
-      <p class="text-sm text-neutral-600 dark:text-neutral-400">
-        <FormattedDate date={post.data.publishedAt} includeRelative={false} />
+    <div class="flex justify-between items-center mt-2 mb-8 text-medium" >
+      <p class="text-sm text-neutral-600 dark:text-neutral-400" >
+       {formattedDate}
       </p>
     </div>
-    <article class="prose prose-quoteless prose-neutral dark:prose-invert">
-      <Content />
-    </article>
-  </section>
+     <article class="prose prose-quoteless prose-neutral dark:prose-invert">
+        <Content />
+      </article>
+ </section>
 </Base>
