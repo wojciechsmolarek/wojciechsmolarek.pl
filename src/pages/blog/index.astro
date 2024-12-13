@@ -5,8 +5,8 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
 );
-const title = "Blog";
-const description = "Wojciech Smolarek Blog";
+const title = "Blog o SEO: Poznaj skuteczne strategie i techniki";
+const description = "Przeczytaj nasz blog o SEO i pozycjonowaniu stron. Odkryj najnowsze strategie, techniki i porady od ekspertów, które pomogą ci rozwinąć twoją witrynę.";
 
 const FormattedDate = ({ date, includeRelative }) => {
     const formattedDate = new Date(date).toLocaleDateString('pl-PL', {
@@ -20,7 +20,7 @@ const FormattedDate = ({ date, includeRelative }) => {
 
 <Base title={title} description={description}>
   <section>
-    <h1 class="mb-8 text-2xl font-medium tracking-tight">Our Blog</h1>
+    <h1 class="mb-8 text-2xl font-medium tracking-tight">Blog o SEO: Poznaj skuteczne strategie i techniki</h1>
     <div>
       {
         posts.map((post) => (
