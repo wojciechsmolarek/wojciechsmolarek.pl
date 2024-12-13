@@ -23,24 +23,31 @@ const navItems = {
                 {metaData.title}
             </a>
         </div>
-        <div class="flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center">
+
+        <div class="flex md:hidden ml-auto">
+            <button id="hamburger-menu" class="focus:outline-none">
+                <Icon name="fa6-solid:bars" class="h-6 w-6 text-[#1c1c1c] dark:text-[#D4D4D4]"/>
+            </button>
+        </div>
+
+        <div class="nav-items hidden md:flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center" id="nav-items">
             {
                 Object.entries(navItems).map(([key, item]) => {
                   if (item.items) {
                     return (
                       <div class="relative">
-                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative dropdown-button"
                           aria-haspopup="true"
                           aria-expanded="false"
                         >
                           {item.name}
-                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4]" />
+                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" />
                         </button>
-                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg"
+                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg dropdown-menu"
                         >
                           {item.items.map((subItem) => (
                             <li>
-                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
                                     {subItem.name}
                                 </a>
                              </li>
@@ -85,32 +92,53 @@ const navItems = {
         document
             .getElementById("theme-toggle")
             .addEventListener("click", toggleTheme);
-        const dropdownButtons = document.querySelectorAll('nav button[aria-haspopup="true"]');
+
+        // Mobile menu toggle
+        const hamburgerButton = document.getElementById('hamburger-menu');
+        const navItems = document.querySelector('.nav-items');
+        hamburgerButton.addEventListener('click', () => {
+            navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+         //Dropdown functionality
+        const dropdownButtons = document.querySelectorAll('.dropdown-button');
         dropdownButtons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
                 const dropdown = button.nextElementSibling;
-                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
 
                 if(isExpanded){
                     button.setAttribute('aria-expanded', 'false');
-                    dropdown.classList.add('hidden');
+                    dropdown.style.display = 'none';
                 } else {
-                    button.setAttribute('aria-expanded', 'true');
-                    dropdown.classList.remove('hidden');
+                     button.setAttribute('aria-expanded', 'true');
+                     dropdown.style.display = 'block';
                 }
+                event.stopPropagation()
+
             });
         });
 
-         document.addEventListener('click', (event) => {
-            if (!event.target.closest('nav button[aria-haspopup="true"]')) {
-              document.querySelectorAll('nav button[aria-haspopup="true"]').forEach(button => {
+         document.addEventListener('click', () => {
+                dropdownButtons.forEach(button => {
                 const dropdown = button.nextElementSibling;
                 if(button.getAttribute('aria-expanded') === 'true'){
                      button.setAttribute('aria-expanded', 'false');
-                    dropdown.classList.add('hidden');
+                    dropdown.style.display = 'none';
                 }
               });
-            }
           });
+
+        // Adjust dropdown width to content
+        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+        dropdownMenus.forEach(menu => {
+            let maxWidth = 0;
+            menu.querySelectorAll('li a').forEach(item => {
+                const itemWidth = item.offsetWidth;
+                maxWidth = Math.max(maxWidth, itemWidth);
+            });
+            menu.style.width = `${maxWidth}px`;
+        });
     });
 </script>
