@@ -37,12 +37,12 @@ const navItems = {
                           {item.name}
                            <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" aria-hidden="true" />
                         </button>
-                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg"
-                            aria-label={`${item.name} submenu`}
+                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg min-w-max"
+                            aria-label={`Subemnu ${item.name}`}
                         >
                           {item.items.map((subItem, index) => (
                             <li key={index}>
-                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
                                     aria-label={`Idź do ${subItem.name}`}
                                 >
                                     {subItem.name}
