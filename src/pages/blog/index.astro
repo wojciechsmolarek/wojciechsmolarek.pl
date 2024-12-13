@@ -1,39 +1,143 @@
 ---
-import Base from "../../layouts/Base.astro";
-import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
+import { metaData } from "../config";
+import { Icon } from "astro-icon/components";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
-);
-
-const title = "Blog";
-const description = "Astrofolio Blog";
+const navItems = {
+    "/projects": { name: "Projekty" },
+    "dropdown": {
+        name: "Usługi",
+        items: [
+            { name: "Konsultacje SEO", path: "#" },
+            { name: "Audyt techniczny SEO", path: "#" },
+            { name: "Pozycjonowanie", path: "#" },
+        ],
+    },
+    "/blog": { name: "Blog" },
+    "/photos": { name: "Kontakt" },
+};
 ---
+<nav class="lg:mb-16 mb-12 py-5">
+    <div class="flex md:flex-row md:items-center justify-between">
+        <div class="flex items-center">
+            <a href="/" class="text-3xl font-semibold">
+                {metaData.title}
+            </a>
+        </div>
 
-<Base title={title} description={description}>
-  <section>
-    <h1 class="mb-8 text-2xl font-medium tracking-tight">Our Blog</h1>
-    <div>
-      {
-        posts.map((post) => (
-          <a
-            class="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
-            href={`/blog/${post.slug}`}>
-            <div class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-              <p class="text-black dark:text-white tracking-tight">
-                {post.data.title}
-              </p>
-              <p class="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                <FormattedDate
-                  date={post.data.publishedAt}
-                  includeRelative={false}
+        <div class="flex md:hidden ml-auto items-center">
+             <button id="hamburger-menu" class="focus:outline-none flex items-center">
+                  <Icon name="fa6-solid:bars" class="h-6 w-6 text-[#1c1c1c] dark:text-[#D4D4D4] mr-2"/>
+                  MENU
+            </button>
+        </div>
+
+        <div class="nav-items hidden md:flex flex-col md:flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center" id="nav-items">
+            {
+                Object.entries(navItems).map(([key, item]) => {
+                  if (item.items) {
+                    return (
+                      <div class="relative">
+                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative dropdown-button"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          {item.name}
+                           <Icon name="fa6-solid:caret-down" class="ml-1 h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" />
+                        </button>
+                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg dropdown-menu top-full left-0 w-full md:w-auto">
+                          {item.items.map((subItem) => (
+                            <li>
+                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap w-full">
+                                    {subItem.name}
+                                </a>
+                             </li>
+                             ))}
+                        </ul>
+                      </div>
+                    );
+                  } else {
+                    return (
+                        <a href={key} class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative">
+                            {item.name}
+                        </a>
+                    );
+                  }
+                })
+            }
+            <button
+                id="theme-toggle"
+                aria-label="Toggle theme"
+                class="flex items-center justify-center transition-opacity duration-300 hover:opacity-90">
+                <Icon
+                    name="fa6-solid:circle-half-stroke"
+                    class="h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4]"
                 />
-              </p>
-            </div>
-          </a>
-        ))
-      }
+            </button>
+        </div>
     </div>
-  </section>
-</Base>
+</nav>
+<script is:inline>
+    function setTheme(theme) {
+        document.dispatchEvent(new CustomEvent("set-theme", { detail: theme }));
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+    }
+
+
+    document.addEventListener("astro:page-load", () => {
+        document
+            .getElementById("theme-toggle")
+            .addEventListener("click", toggleTheme);
+
+        // Mobile menu toggle
+        const hamburgerButton = document.getElementById('hamburger-menu');
+        const navItems = document.querySelector('.nav-items');
+        hamburgerButton.addEventListener('click', () => {
+             navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+         //Dropdown functionality
+        const dropdownButtons = document.querySelectorAll('.dropdown-button');
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const dropdown = button.nextElementSibling;
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                if(isExpanded){
+                    button.setAttribute('aria-expanded', 'false');
+                    dropdown.style.display = 'none';
+                } else {
+                    button.setAttribute('aria-expanded', 'true');
+                    dropdown.style.display = 'block';
+                }
+                 event.stopPropagation()
+            });
+        });
+
+         document.addEventListener('click', () => {
+                dropdownButtons.forEach(button => {
+                const dropdown = button.nextElementSibling;
+                if(button.getAttribute('aria-expanded') === 'true'){
+                     button.setAttribute('aria-expanded', 'false');
+                    dropdown.style.display = 'none';
+                }
+              });
+          });
+
+        // Adjust dropdown width to content
+        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+        dropdownMenus.forEach(menu => {
+            let maxWidth = 0;
+            menu.querySelectorAll('li a').forEach(item => {
+                const itemWidth = item.offsetWidth;
+                maxWidth = Math.max(maxWidth, itemWidth);
+            });
+            menu.style.width = `${maxWidth}px`;
+        });
+
+    });
+</script>
