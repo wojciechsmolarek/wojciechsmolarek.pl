@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 const title = "Technical SEO Specialist, Freelancer SEO";
 const description = "Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptymalizować stronę, poprawić widoczność i zwiększyć ruch organiczny. Sprawdź, jak mogę wesprzeć Twój biznes!";
@@ -8,12 +8,15 @@ const description = "Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptyma
 
 <Base title={title} description={description}>
   <section>
-    <Image
+    <Picture
+      formats={['avif', 'webp']}
+      preload="avif"
       src="/profile-photo.jpg"
       alt="Wojciech Smolarek - Technical SEO Specialist oraz freelancer SEO"
       class="rounded-full block lg:mt-5 mt-0 lg:mb-5 mb-10 mx-auto sm:float-right sm:ml-5 sm:mb-5"
       width="160"
       height="160"
+      loading="eager"
     />
   
     <h1 class="mb-8 text-2xl font-medium tracking-tight">
