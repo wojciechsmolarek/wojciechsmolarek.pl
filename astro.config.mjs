@@ -56,7 +56,7 @@ export default defineConfig({
     }),
     icon({
       include: {
-        "fa6-solid": ["rss", "circle-half-stroke"],
+        "fa6-solid": ["rss", "circle-half-stroke", "caret-down"],
         tabler: ["mail-filled"],
         "fa6-brands": ["x-twitter", "github", "instagram", "linkedin-in"],
       },
