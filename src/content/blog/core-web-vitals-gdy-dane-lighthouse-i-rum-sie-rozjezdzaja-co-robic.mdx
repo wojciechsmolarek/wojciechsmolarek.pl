@@ -5,7 +5,7 @@ summary: "Analiza problemu niezgodności danych core web vitals, między narzęd
 tags: "RUM, Lighthouse"
 ---
 
-Witaj! Dziś poruszę bardzo ważny i często frustrujący temat dla wszystkich, którzy na poważnie podchodzą do **optymalizacji stron internetowych**. Mówię o sytuacji, gdy dane **core web vitals (CWV)**, które uzyskujesz w narzędziu **Lighthouse (laboratory)**, znacząco różnią się od danych, które widzisz w rzeczywistym środowisku (real user monitoring – **RUM**), na przykład w Google Search Console. Skąd te różnice i jak z nimi walczyć? Zapraszam do lektury.
+Witaj! Dziś poruszę bardzo ważny i często frustrujący temat dla wszystkich, którzy na poważnie podchodzą do **optymalizacji stron internetowych**. Mówię o sytuacji, gdy dane **core web vitals (CWV)**, które uzyskujesz w narzędziu **Lighthouse (laboratory)**, znacząco różnią się od danych, które widzisz w rzeczywistym środowisku (real user monitoring – **RUM**). Skąd te różnice i jak z nimi walczyć? Zapraszam do lektury.
 
 ## Lab vs. Field Data - podstawy
 
@@ -15,11 +15,11 @@ Z drugiej strony mamy real user monitoring, czyli zbieranie danych **bezpośredn
 
 ## Niezgodności danych CWV - dlaczego tak się dzieje?
 
-Dlaczego więc **core web vitals** z narzędzia Lighthouse często „pokazują” nam zielone wyniki, podczas gdy Google Search Console wyświetla czerwone? Problemów może być naprawdę wiele, a ja wypunktuje te najczęściej spotykane:
+Dlaczego więc **core web vitals** z narzędzia Lighthouse często „pokazują” nam zielone wyniki, podczas gdy dane RUM (np. z oprogramowania DebugBead) wyświetlają czerwone? Problemów może być naprawdę wiele, a ja wypunktuje te najczęściej spotykane:
 
--   **Środowisko testowe a rzeczywistość:** Lighthouse testuje naszą stronę w kontrolowanych warunkach (z ograniczoną liczbą konfiguracji). Na "żywym" internecie mamy jednak setki zmiennych, od rodzaju urządzeń i łączy, po jakość sieci. Symulacja nigdy w pełni nie odwzoruje prawdziwej sytuacji. Lighthouse nie wie jaki telefon ma konkretny użytkownik, ani na ile jego sieć internetowa jest "mocna".
+-   **Środowisko testowe a rzeczywistość:** Lighthouse testuje naszą stronę w kontrolowanych warunkach (z ograniczoną liczbą konfiguracji). Na "żywym" internecie mamy jednak setki zmiennych, od rodzaju urządzeń i łączy, po jakość sieci. Symulacja nigdy w pełni nie odwzoruje prawdziwej sytuacji. 
 -   **Prędkość łącza:** Lighthouse testuje na ogół na średnim (lub słabym) łączu. Użytkownicy w zależności od połączenia (5g vs 2g) generują zupełnie inne wartości CWV. Lighthouse z całą pewnością nie ma w sobie konfiguracji dla "kosmicznie szybkich łączy" gdzie opóźnienia są bliskie zera, ani bardzo słabych łączach np. na terenach pozamiejskich.
--  **Konfiguracja przeglądarki:** Użytkownicy mają bardzo zróżnicowane konfiguracje przeglądarek. Inna będzie strona ładowała się w przeglądarce desktop, z zainstalowanymi wtyczkami niż mobile - dodatkowo używając standardowej wtyczki blokującej reklamy/śledzenie (wbrew pozorom). Takiej informacji również nie mamy na Lighthouse - i jego wynik będzie czystą teorią.
+-  **Konfiguracja przeglądarki:** Użytkownicy mają bardzo zróżnicowane konfiguracje przeglądarek. Inna będzie strona ładowała się w przeglądarce desktop, z zainstalowanymi wtyczkami niż mobile. Takiej informacji również nie mamy na Lighthouse - i jego wynik będzie czystą teorią.
 -   **Blokujące zasoby:** Skrypty firm trzecich, które ładowane są "w locie", mogą wydłużyć **czas ładowania**, szczególnie, gdy pochodzą z zewnątrz. Na symulacji Lighthouse - mogą te dane umknąć, a na realnej - powodować problemy.
 - **User journey**: Lighthouse w żaden sposób nie przewidzi z jaką intensywnością i w jaki sposób użytkuje dany element. Przecież od razu przy starcie strony nie zablokujesz na "klik" i użytkownik tak na pewno nie zachowa się - więc i dane CWV są "strzelane" i "w teorii" i nie oddają całej złożoności
 
@@ -27,11 +27,12 @@ Dlaczego więc **core web vitals** z narzędzia Lighthouse często „pokazują�
 
 Jak zatem podejść do problemu, gdy dane Lighthouse i RUM się nie zgadzają? Oto kilka kluczowych wskazówek:
 
-1.  **Priorytetowo traktuj dane RUM:** dane z Google Search Console, czyli rzeczywiste dane z działania serwisu, to **twój punkt odniesienia**. Jeśli masz tam problemy – szukaj rozwiązania najpierw tutaj, niezależnie od tego jak piękne kolorki pokaże ci Lighthouse. Nie "walcz z wyobrażeniami", a z realnym problemem!
-2.  **Szczegółowa analiza raportów:** gdy wystąpi problem, **użyj narzędzi takich jak google pageSpeed insights czy webpagetest** , analizując problem na przykład pod kątem urządzenia lub regionu. Poznaj jaki problem najczęściej dotyczy danego podmiotu i działaj w tej materii. Zastosowanie różnej przepustowości lub urządzenia sprawi, że dane będą znacznie bardziej przydatne.
-3.  **Ulepsz testowanie mobilne:** twoi użytkownicy przeglądają najczęściej strony internetowe na smartphonach – musisz skupić się na poprawkach właśnie tam (szczególnie jeśli jesteś e-commerce). Lighthouse oferuje takie testowanie, ale możesz też na bieżąco testować przez wbudowane w telefon tryby developerskie (emulacja wolnej sieci itp.). Nie czekaj, aż google podpowie, że to problem.
-4.  **Zarządzanie zewnętrznymi skryptami:** przeanalizuj wpływ każdego skryptu od firm trzecich. Postaraj się załadować skrypty asynchronicznie. Do przetestowania zasobów w kodzie użyj webpagetest.org (daje możliwość wyłączenia danych blokujących stron). Zastanów się, czy aby na pewno wszystkie te wtyczki/skrypty, są tak istotne dla twojej witryny.
-5.   **Monitoruj zmiany:** każda implementowana poprawka, zawsze powinna być weryfikowana pod kątem osiągniętych rezultatów. Używaj więc google search console i analizuj, jak zmiany wpływają na prawdziwych użytkowników twojego serwisu. Po poprawie i wdrożeniu obserwuj realne wyniki (a nie tylko w lab), by móc odpowiednio zareagować w przyszłości.
+1.  **Priorytetowo traktuj dane RUM:**, rzeczywiste dane z działania serwisu, to **twój punkt odniesienia**. Jeśli masz tam problemy – szukaj rozwiązania najpierw tutaj, niezależnie od tego jak piękne kolorki pokaże ci Lighthouse. Nie "walcz z wyobrażeniami", a z realnym problemem!
+2.  **Szczegółowa analiza raportów:** gdy wystąpi problem, **użyj narzędzi takich jak WebVitals.js, DebugBear czy WebPageTest** , analizując problem na przykład pod kątem urządzenia lub regionu. Poznaj jaki problem najczęściej dotyczy danego podmiotu i działaj w tej materii. Zastosowanie różnej przepustowości lub urządzenia sprawi, że dane będą znacznie bardziej przydatne.
+3.  **Ulepsz testowanie mobilne:** twoi użytkownicy przeglądają najczęściej strony internetowe na smartphonach – musisz skupić się na poprawkach właśnie tam (szczególnie jeśli jesteś e-commerce). Lighthouse oferuje takie testowanie, ale możesz też na bieżąco testować przez wbudowane w telefon tryby developerskie (emulacja wolnej sieci itp.). Nie czekaj, aż Google podpowie, że to problem.
+4.  **Zarządzanie zewnętrznymi skryptami:** przeanalizuj wpływ każdego skryptu od firm trzecich. Postaraj się załadować skrypty asynchronicznie. Do przetestowania zasobów w kodzie użyj WebPageTest (daje możliwość wyłączenia danych blokujących stron). Zastanów się, czy aby na pewno wszystkie te wtyczki/skrypty, są tak istotne dla twojej witryny.
+5.   **Monitoruj zmiany:** każda implementowana poprawka, zawsze powinna być weryfikowana pod kątem osiągniętych rezultatów. Analizuj, jak zmiany wpływają na prawdziwych użytkowników twojego serwisu. Po poprawie i wdrożeniu obserwuj realne wyniki (a nie tylko w lab), by móc odpowiednio zareagować w przyszłości.
+6.   **Uwaga na Wtyczki Cache w WordPressie**, w przypadku stron opartych na WordPressie często spotykamy wtyczki do cache, które potrafią "oszukać" narzędzia diagnostyczne jak Lighthouse, generując "zielone" wyniki w testach laboratoryjnych, podczas gdy w rzeczywistości strona nadal ładuje się wolno dla użytkowników. Dlatego pamiętaj, by nigdy nie ufać danym "na ślepo" - weryfikuj rezultaty danych z pomiarów RUM, analizuj wydajność serwisu nie tylko testach syntetycznych - to one definiują, czy dokonane poprawki zadziałały i generują realną wartość dla Twoich odbiorców!
 
 ### Czy to oznacza, że Lighthouse jest bezużyteczne?
 
@@ -39,4 +40,7 @@ Zdecydowanie nie! Lighthouse to bardzo dobre **narzędzie analityczne** – potr
 
 ## Zawsze bazuj na rzeczywistości!
 
-Niezgodności w wynikach **core web vitals** między danymi laboratoryjnymi a RUM to norma. Kluczem jest to, by zrozumieć **różnice między nimi, zidentyfikować najważniejsze problemy** i przede wszystkim **patrzeć na realne wyniki, nie tylko wyidealizowane testy w sztucznych warunkach**. Poprawiaj swoją witrynę w rzeczywistości a nie symulacjach i korzystaj z testów jako pomocnicze elementy do "rozwoju i odkrywania możliwości strony".
+Niezgodności w wynikach **core web vitals** między danymi laboratoryjnymi a RUM to częsta sytuacja. Kluczem jest to, by zrozumieć **różnice między nimi, zidentyfikować najważniejsze problemy** i przede wszystkim **patrzeć na realne wyniki, nie tylko wyidealizowane testy w sztucznych warunkach**. Poprawiaj swoją witrynę w rzeczywistości a nie symulacjach i korzystaj z testów jako pomocnicze elementy do "rozwoju i odkrywania możliwości strony".
+
+
+> Czy Twoja strona również "oszukuje" testy w Lighthouse, a użytkownicy nadal czekają? Jeśli masz problemy z niespójnymi danymi CWV i potrzebujesz pomocy z optymalizacją techniczną strony, skontaktuj się ze mną. Na pewno znajdziemy rozwiązanie, by poprawić widoczność i wydajność Twojego serwisu. [Porozmawiajmy, jak mogę Ci pomóc](mailto:wojteksmolarek7@gmail.com)!
