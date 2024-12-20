@@ -13,27 +13,33 @@ const socialIcons = [
 ---
 
 <footer class="mt-16 lg:mt-24 text-gray-800 dark:text-gray-300 relative">
-    <small class="block">
+  <small class="block text-base">
     <span aria-label="Year">© {YEAR}</span>
     {" "}
     <span>
-      <a href="/" aria-label="Link do strony głównej" rel="home">{metaData.title}</a>
-      <a href="/regulamin" aria-label="Link do regulaminu"> | Regulamin</a>
-      <a href="/polityka-prywatnosci" aria-label="Link do polityki prywatności"> | Polityka prywatności</a> </span>
+      <a href="/" aria-label="Link do strony głównej" rel="home" class="inline-block py-2 px-3">{metaData.title}</a>
+      <a href="/regulamin" aria-label="Link do regulaminu" class="inline-block py-2 px-3"> | Regulamin</a>
+      <a href="/polityka-prywatnosci" aria-label="Link do polityki prywatności" class="inline-block py-2 px-3"> | Polityka prywatności</a>
     </span>
-      </small>
+  </small>
 
-    <nav class="float-right">
-        <ul class="flex text-lg gap-3.5 transition-opacity duration-300 hover:opacity-90">
-        {
-            socialIcons.map((link) => (
-                <li class="m-0 p-0">
-                   <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.href.includes("github") ? "Profil na GitHub" : link.href.includes("instagram") ? "Profil na Instagram" : link.href.includes("linkedin") ? "Profil na LinkedIn" : "Wyślij wiadomość na Email" }>
-                    <Icon name={link.icon} />
-                    </a>
-                </li>
-            ))
-        }
-        </ul>
-    </nav>
+  <nav class="float-right">
+    <ul class="flex text-lg gap-4 transition-opacity duration-300 hover:opacity-90">
+      {
+        socialIcons.map((link) => (
+          <li class="m-0 p-0">
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.href.includes("github") ? "Profil na GitHub" : link.href.includes("instagram") ? "Profil na Instagram" : link.href.includes("linkedin") ? "Profil na LinkedIn" : "Wyślij wiadomość na Email"}
+              class="inline-block p-3"
+            >
+              <Icon name={link.icon} class="w-6 h-6" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </footer>
