@@ -83,7 +83,7 @@ export default defineConfig({
   output: "static",
   adapter: vercel({
     webAnalytics: {
-      enabled: true,
+      enabled: false,
     },
     imageService: true,
     devImageService: "sharp",
