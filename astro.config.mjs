@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import vercel from "@astrojs/vercel/static";
 import icon from "astro-icon";
 import opengraphImages, { presets } from "astro-opengraph-images";
+import fs from 'fs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,8 +26,8 @@ export default defineConfig({
         themes: {
           light: "github-light",
           dark: "github-dark",
-          langs: [],
         },
+        langs: [],
       },
       remarkPlugins: [remarkMath],
       rehypePlugins: [
@@ -61,14 +62,11 @@ export default defineConfig({
         "fa6-brands": ["x-twitter", "github", "instagram", "linkedin-in"],
       },
     }),
-    sitemap(),
     opengraphImages({
       render: presets.waveSvg,
       options: {
         fonts: [
           {
-            name: "Roboto",
-            name: "Roboto",
             name: "Roboto",
             weight: 400,
             style: "normal",
