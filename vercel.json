@@ -20,5 +20,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/projects",
+      "destination": "/zrealizowane-projekty",
+      "permanent": true
+    }
   ]
 }
