@@ -62,9 +62,6 @@ export default defineConfig({
       },
     }),
     sitemap(),
-    redirects: {
-      '/projects': '/zrealizowane-projekty'
-    }
     opengraphImages({
       render: presets.waveSvg,
       options: {
