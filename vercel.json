@@ -20,10 +20,5 @@
         }
       ]
     }
-  ],
-  {
-  "redirects": [
-    { "source": "/projects", "destination": "/zrealizowane-projekty", "statusCode": 301 }
   ]
-  }
 }
