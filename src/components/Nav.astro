@@ -74,48 +74,105 @@ const navItems = {
         </div>
     </div>
 </nav>
+
 <script is:inline>
     function setTheme(theme) {
         document.dispatchEvent(new CustomEvent("set-theme", { detail: theme }));
     }
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-}
 
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+    }
 
-document.addEventListener("astro:page-load", () => {
-    document
-        .getElementById("theme-toggle")
-        .addEventListener("click", toggleTheme);
-    const dropdownButtons = document.querySelectorAll('nav button[aria-haspopup="true"]');
-    dropdownButtons.forEach(button => {
-        button.addEventListener('click', () => {
+    document.addEventListener("astro:page-load", () => {
+        document
+            .getElementById("theme-toggle")
+            .addEventListener("click", toggleTheme);
+            
+        const dropdownButtons = document.querySelectorAll('nav button[aria-haspopup="true"]');
+        
+        dropdownButtons.forEach(button => {
             const dropdown = button.nextElementSibling;
-             const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            const dropdownLinks = dropdown.querySelectorAll('a');
 
-            if(isExpanded){
-                button.setAttribute('aria-expanded', 'false');
-                dropdown.classList.add('hidden');
-            } else {
-                button.setAttribute('aria-expanded', 'true');
-                dropdown.classList.remove('hidden');
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                // Zamknij wszystkie inne menu
+                dropdownButtons.forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.setAttribute('aria-expanded', 'false');
+                        otherButton.nextElementSibling.classList.add('hidden');
+                    }
+                });
+
+                button.setAttribute('aria-expanded', !isExpanded);
+                dropdown.classList.toggle('hidden');
+
+                // Jeśli menu jest otwarte, ustaw focus na pierwszy link
+                if (!isExpanded) {
+                    dropdownLinks[0]?.focus();
+                }
+            });
+
+            // Obsługa nawigacji klawiaturą
+            button.addEventListener('keydown', (e) => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                
+                switch (e.key) {
+                    case 'Escape':
+                        if (isExpanded) {
+                            button.setAttribute('aria-expanded', 'false');
+                            dropdown.classList.add('hidden');
+                            button.focus();
+                        }
+                        break;
+                    case 'ArrowDown':
+                        if (!isExpanded) {
+                            e.preventDefault();
+                            button.setAttribute('aria-expanded', 'true');
+                            dropdown.classList.remove('hidden');
+                            dropdownLinks[0]?.focus();
+                        }
+                        break;
+                }
+            });
+
+            // Obsługa nawigacji w menu
+            dropdownLinks.forEach((link, index) => {
+                link.addEventListener('keydown', (e) => {
+                    switch (e.key) {
+                        case 'ArrowDown':
+                            e.preventDefault();
+                            dropdownLinks[(index + 1) % dropdownLinks.length]?.focus();
+                            break;
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            if (index === 0) {
+                                button.focus();
+                                button.setAttribute('aria-expanded', 'false');
+                                dropdown.classList.add('hidden');
+                            } else {
+                                dropdownLinks[index - 1]?.focus();
+                            }
+                            break;
+                    }
+                });
+            });
+        });
+
+        // Zamykanie menu po kliknięciu poza
+        document.addEventListener('click', (event) => {
+            const isClickInsideDropdown = event.target.closest('.relative');
+            if (!isClickInsideDropdown) {
+                dropdownButtons.forEach(button => {
+                    button.setAttribute('aria-expanded', 'false');
+                    button.nextElementSibling.classList.add('hidden');
+                });
             }
         });
     });
-
-     document.addEventListener('click', (event) => {
-        if (!event.target.closest('nav button[aria-haspopup="true"]')) {
-          document.querySelectorAll('nav button[aria-haspopup="true"]').forEach(button => {
-            const dropdown = button.nextElementSibling;
-            if(button.getAttribute('aria-expanded') === 'true'){
-                 button.setAttribute('aria-expanded', 'false');
-                dropdown.classList.add('hidden');
-            }
-          });
-        }
-      });
-});
-
 </script>
