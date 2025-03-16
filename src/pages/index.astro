@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { Picture } from "astro:assets";
+import { Schema } from "astro-seo-schema";
 
 const title = "Technical SEO Specialist, Freelancer i Specjalista SEO";
 const description = "Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptymalizować stronę, poprawić widoczność i zwiększyć ruch. Sprawdź, jak mogę wesprzeć Twój biznes!";
@@ -59,4 +60,100 @@ const description = "Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptyma
         </p>
     </div>
   </section>
+
+  <Schema item={{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Wojciech Smolarek",
+    "jobTitle": "Technical SEO Specialist",
+    "description": "Specjalista ds. technicznego SEO, freelancer SEO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Oponeo.pl"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bydgoszcz",
+      "addressRegion": "Województwo kujawsko-pomorskie",
+      "addressCountry": "PL"
+    },
+    "url": "https://www.wojciechsmolarek.pl",
+    "sameAs": [],
+    "knowsAbout": [
+      "SEO techniczne",
+      "Audyt techniczny SEO",
+      "Przyspieszanie stron",
+      "Schema.org",
+      "Indeksowanie i crawling",
+      "Migracje stron",
+      "Mobile-First Indexing",
+      "Analiza logów serwera"
+    ],
+    "makesOffer": {
+      "@type": "Offer",
+      "itemOffered": [
+        {
+          "@type": "Service",
+          "name": "Audyt techniczny SEO",
+          "description": "Znajdowanie problemów, które mogą być niewidoczne na pierwszy rzut oka"
+        },
+        {
+          "@type": "Service",
+          "name": "Przyspieszanie stron",
+          "description": "Optymalizacja szybkości ładowania witryny"
+        },
+        {
+          "@type": "Service",
+          "name": "Wdrażanie schema.org",
+          "description": "Pomaganie robotom wyszukiwarek lepiej rozumieć treść strony"
+        },
+        {
+          "@type": "Service",
+          "name": "Indeksowanie i crawling",
+          "description": "Upewnienie się, że Google widzi stronę prawidłowo"
+        },
+        {
+          "@type": "Service",
+          "name": "Migracje stron",
+          "description": "Bezpieczne przenoszenie witryn bez utraty widoczności"
+        },
+        {
+          "@type": "Service",
+          "name": "Dostosowanie do Mobile-First Indexing",
+          "description": "Optymalizacja strony pod kątem urządzeń mobilnych"
+        },
+        {
+          "@type": "Service",
+          "name": "Analiza logów serwera",
+          "description": "Sprawdzanie, jak roboty wyszukiwarek poruszają się po stronie"
+        }
+      ]
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "kontakt@wojciechsmolarek.pl"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "name": "Wojciech Smolarek - Technical SEO Specialist oraz freelancer SEO",
+      "description": "Specjalista ds. technicznego SEO z Bydgoszczy, oferujący usługi w zakresie optymalizacji technicznej stron internetowych",
+      "url": "https://www.wojciechsmolarek.pl",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Strona główna",
+            "item": "https://www.wojciechsmolarek.pl"
+          }
+        ]
+      },
+      "potentialAction": {
+        "@type": "CommunicateAction",
+        "target": "https://www.wojciechsmolarek.pl/kontakt"
+      }
+    }
+  }} />  
 </Base>

@@ -27,6 +27,7 @@
     "astro-icon": "^1.1.1",
     "astro-opengraph-images": "^1.11.6",
     "astro-seo": "^0.8.4",
+    "astro-seo-schema": "^5.0.0",
     "astro-themes": "^0.2.5",
     "katex": "^0.16.11",
     "lenis": "^1.1.14",
@@ -39,6 +40,7 @@
     "rehype-katex": "^7.0.1",
     "rehype-slug": "^6.0.0",
     "remark-math": "^6.0.0",
+    "schema-dts": "^1.1.5",
     "tw-to-css": "^0.0.12",
     "vite": "^6.2.1"
   },

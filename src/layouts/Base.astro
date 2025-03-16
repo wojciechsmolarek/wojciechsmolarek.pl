@@ -7,7 +7,6 @@ interface Props {
 }
 
 import Themes from "astro-themes";
-import { ViewTransitions } from "astro:transitions";
 import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -19,7 +18,6 @@ const { title, description, image, robots } = Astro.props;
 
 <html lang="pl" class="scrollbar-hide lenis lenis-smooth scroll-smooth">
   <head>
-    <ViewTransitions />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content={robots || "index, follow"}>
     <Themes />
