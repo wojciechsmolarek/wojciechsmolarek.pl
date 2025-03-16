@@ -5,7 +5,7 @@ interface Props {
   image?: string;
   robots?: string;
 }
-
+import { ClientRouter } from "astro:transitions";
 import Themes from "astro-themes";
 import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Nav.astro";
@@ -19,6 +19,7 @@ const { title, description, image, robots } = Astro.props;
 <html lang="pl" class="scrollbar-hide lenis lenis-smooth scroll-smooth">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <ClientRouter />
     <meta name="robots" content={robots || "index, follow"}>
     <Themes />
     <meta name="google-site-verification" content="CU-3rSFDAgjH97IyhDAwt8twd7LBjux2sUS6CQ0B9OM" />

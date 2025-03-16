@@ -2,12 +2,17 @@
 import { metaData } from "../config";
 import { Icon } from "astro-icon/components";
 
-const navMenuItems = {
+interface MenuItem {
+    name: string;
+    items?: { name: string; path: string; }[];
+}
+
+const navMenuItems: Record<string, MenuItem> = {
     "/zrealizowane-projekty": { name: "Projekty" },
     "dropdown": {
         name: "Usługi",
         items: [
-            { name: "Konsultacje SEO", path: "/konsultacje-seo" },
+            { name: 'Konsultacje SEO', path: "/konsultacje-seo" },
             { name: "Audyt techniczny SEO", path: "/audyt-techniczny-seo" },
             { name: "Pozycjonowanie", path: "/pozycjonowanie" },
         ],
@@ -29,10 +34,10 @@ const navMenuItems = {
                   if (item.items) {
                     return (
                       <div class="relative" key={key}>
-                        <button class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative"
+                        <button class="transition:all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          aria-label={`Otwóz menu ${item.name}`}
+                          aria-label={`Otwórz menu ${item.name}`}
                         >
                           {item.name}
                            <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" aria-hidden="true" />
