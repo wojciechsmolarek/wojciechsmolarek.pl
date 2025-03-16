@@ -2,7 +2,7 @@
 import { metaData } from "../config";
 import { Icon } from "astro-icon/components";
 
-const navItems = {
+const navMenuItems = {
     "/zrealizowane-projekty": { name: "Projekty" },
     "dropdown": {
         name: "Usługi",
@@ -25,7 +25,7 @@ const navItems = {
         </div>
         <div class="flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center">
             {
-                Object.entries(navItems).map(([key, item]) => {
+                Object.entries(navMenuItems).map(([key, item]) => {
                   if (item.items) {
                     return (
                       <div class="relative" key={key}>
@@ -95,27 +95,30 @@ const navItems = {
         
         dropdownButtons.forEach(button => {
             const dropdown = button.nextElementSibling;
+            
+            // Upewnij się, że dropdown istnieje
+            if (!dropdown) return;
+            
             const dropdownLinks = dropdown.querySelectorAll('a');
 
+            // Dodaj obsługę kliknięcia
             button.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
+                
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
+                
                 // Zamknij wszystkie inne menu
                 dropdownButtons.forEach(otherButton => {
                     if (otherButton !== button) {
                         otherButton.setAttribute('aria-expanded', 'false');
-                        otherButton.nextElementSibling.classList.add('hidden');
+                        otherButton.nextElementSibling?.classList.add('hidden');
                     }
                 });
 
-                button.setAttribute('aria-expanded', !isExpanded);
+                // Przełącz stan aktualnego menu
+                button.setAttribute('aria-expanded', String(!isExpanded));
                 dropdown.classList.toggle('hidden');
-
-                // Jeśli menu jest otwarte, ustaw focus na pierwszy link
-                if (!isExpanded) {
-                    dropdownLinks[0]?.focus();
-                }
             });
 
             // Obsługa nawigacji klawiaturą
