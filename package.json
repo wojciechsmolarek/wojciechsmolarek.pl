@@ -1,5 +1,5 @@
 {
-  "name": "Astrofolio",
+  "name": "WojciechSmolarek.pl",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -61,5 +61,8 @@
   },
   "resolutions": {
     "rollup": "npm:@rollup/wasm-node"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
