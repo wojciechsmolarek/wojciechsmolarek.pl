@@ -34,10 +34,11 @@ const navMenuItems: Record<string, MenuItem> = {
                   if (item.items) {
                     return (
                       <div class="relative" key={key}>
-                        <button class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          aria-label={`Otwórz menu ${item.name}`}
+                        <button 
+                            class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            aria-label={`Otwórz menu ${item.name}`}
                         >
                           {item.name}
                            <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" aria-hidden="true" />
@@ -47,8 +48,10 @@ const navMenuItems: Record<string, MenuItem> = {
                         >
                           {item.items.map((subItem, index) => (
                             <li key={index}>
-                                <a href={subItem.path} class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                                <a href={subItem.path} 
+                                    class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
                                     aria-label={`Idź do ${subItem.name}`}
+                                    rel="prefetch"
                                 >
                                     {subItem.name}
                                 </a>
@@ -59,7 +62,10 @@ const navMenuItems: Record<string, MenuItem> = {
                     );
                   } else {
                     return (
-                        <a href={key} class="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative" aria-label={`Idź do ${item.name}`} key={key}>
+                        <a href={key} class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative" 
+                            aria-label={`Idź do ${item.name}`} 
+                            key={key}
+                            rel="prefetch">
                             {item.name}
                         </a>
                     );
