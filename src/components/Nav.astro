@@ -80,7 +80,7 @@ const navMenuItems: Record<string, MenuItem> = {
     </div>
 </nav>
 
-<script is:inline>
+<script is:inline define:vars={{ minified: true }}>
     function setTheme(theme) {
         document.dispatchEvent(new CustomEvent("set-theme", { detail: theme }));
     }
