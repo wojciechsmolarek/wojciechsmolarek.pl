@@ -17,14 +17,14 @@ const socialIcons = [
     <span>© {YEAR}</span>
     {" "}
     <span>
-      <a href="/" aria-label="Link do strony głównej" rel="home" class="inline-block py-2 px-3">{metaData.title}</a>
-      <a href="/regulamin" aria-label="Link do regulaminu" class="inline-block py-2 px-3">Regulamin</a>
-      <a href="/polityka-prywatnosci" aria-label="Link do polityki prywatności" class="inline-block py-2 px-3">Polityka prywatności</a>
+      <a href="/" aria-label="Link do strony głównej" rel="home" class="inline-block py-2 px-3 hover:underline">{metaData.title}</a>
+      <a href="/regulamin" aria-label="Link do regulaminu" class="inline-block py-2 px-3 hover:underline">Regulamin</a>
+      <a href="/polityka-prywatnosci" aria-label="Link do polityki prywatności" class="inline-block py-2 px-3 hover:underline">Polityka prywatności</a>
     </span>
   </small>
 
   <nav class="float-left">
-    <ul class="flex text-lg gap-4 duration-300 hover:opacity-90">
+    <ul class="flex text-lg gap-4 duration-300 hover:opacity-90 hover:text-underline">
       {
         socialIcons.map((link) => (
           <li class="m-0 p-0">

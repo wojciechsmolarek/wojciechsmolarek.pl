@@ -62,7 +62,7 @@ const navMenuItems: Record<string, MenuItem> = {
                     );
                   } else {
                     return (
-                        <a href={key} class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative" 
+                        <a href={key} class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative hover:underline" 
                             aria-label={`Idź do ${item.name}`} 
                             key={key}
                             rel="prefetch">
@@ -79,7 +79,7 @@ const navMenuItems: Record<string, MenuItem> = {
                 <Icon
                     name="fa6-solid:circle-half-stroke"
                     class="h-[14px] w-[14px] text-[#1c1c1c] dark:text-[#D4D4D4]"
-                     aria-hidden="true"
+                     aria-hidden="false"
                 />
             </button>
         </div>
