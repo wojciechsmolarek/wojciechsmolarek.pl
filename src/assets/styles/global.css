@@ -12,6 +12,51 @@ html {
   min-width: 360px;
 }
 
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus indicators for accessibility */
+*:focus {
+  outline: 2px solid #47a3f3;
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #47a3f3;
+  outline-offset: 2px;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #47a3f3;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
 .prose {
   @apply text-[#333333] dark:text-[#D4D4D4];
 }
@@ -35,6 +80,11 @@ html {
 
 .prose a:hover {
   @apply dark:decoration-neutral-400 decoration-neutral-600;
+}
+
+.prose a:focus {
+  outline: 2px solid #47a3f3;
+  outline-offset: 2px;
 }
 
 .prose .anchor:after {
@@ -132,4 +182,80 @@ table {
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Improved contrast for better accessibility */
+.text-neutral-600 {
+  color: #525252; /* Darker for better contrast */
+}
+
+.dark .text-neutral-400 {
+  color: #a3a3a3; /* Lighter for better contrast in dark mode */
+}
+
+/* Button focus styles */
+button:focus,
+a:focus {
+  outline: 2px solid #47a3f3;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  *:focus {
+    outline: 3px solid #000000;
+    outline-offset: 1px;
+  }
+  
+  .prose a {
+    text-decoration: underline;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Better focus styles for interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+  transition: outline-color 0.2s ease;
+}
+
+/* Ensure sufficient color contrast */
+.text-gray-800 {
+  color: #1f2937; /* Darker for better contrast */
+}
+
+.dark .text-gray-300 {
+  color: #d1d5db; /* Lighter for better contrast in dark mode */
+}
+
+/* Improve button accessibility */
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Better link styling for accessibility */
+a[href^="tel:"] {
+  text-decoration: underline;
+}
+
+a[href^="mailto:"] {
+  text-decoration: underline;
 }

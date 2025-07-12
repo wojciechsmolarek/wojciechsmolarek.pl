@@ -29,6 +29,7 @@
     "astro-seo": "^0.8.4",
     "astro-seo-schema": "^5.0.0",
     "astro-themes": "^0.2.5",
+    "esbuild": "^0.25.6",
     "install": "^0.13.0",
     "katex": "^0.16.11",
     "lenis": "^1.1.14",
@@ -43,6 +44,7 @@
     "rehype-slug": "^6.0.0",
     "remark-math": "^6.0.0",
     "schema-dts": "^1.1.5",
+    "stringify-entities": "^4.0.4",
     "tw-to-css": "^0.0.12",
     "vite": "^6.2.1",
     "zwitch": "^2.0.4"

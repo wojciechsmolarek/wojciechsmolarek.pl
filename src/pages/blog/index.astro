@@ -19,26 +19,32 @@ const FormattedDate = ({ date, includeRelative }) => {
 ---
 
 <Base title={title} description={description}>
-  <section>
-    <h1 class="mb-8 text-2xl font-medium tracking-tight">Blog o SEO: Poznaj skuteczne strategie i techniki</h1>
-    <div>
+  <section aria-labelledby="blog-heading">
+    <h1 id="blog-heading" class="mb-8 text-2xl font-medium tracking-tight">Blog o SEO: Poznaj skuteczne strategie i techniki</h1>
+    <div role="list" aria-label="Lista artykułów blogowych">
       {
         posts.map((post) => (
-          <a
-            class="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
-            href={`/blog/${post.slug}`}>
-            <div class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-              <p class="text-black dark:text-white tracking-tight">
-                {post.data.title}
-              </p>
-              <p class="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                <FormattedDate
-                  date={post.data.publishedAt}
-                  includeRelative={false}
-                />
-              </p>
-            </div>
-          </a>
+          <article role="listitem" class="mb-4">
+            <a
+              class="flex flex-col space-y-1 transition-opacity duration-200 hover:opacity-80"
+              href={`/blog/${post.slug}`}
+              aria-label={`Przeczytaj artykuł: ${post.data.title}`}>
+              <div class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <h2 class="text-black dark:text-white tracking-tight text-lg">
+                  {post.data.title}
+                </h2>
+                <time 
+                  class="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm"
+                  datetime={post.data.publishedAt.toISOString()}
+                  aria-label={`Opublikowano: `}>
+                  <FormattedDate
+                    date={post.data.publishedAt}
+                    includeRelative={false}
+                  />
+                </time>
+              </div>
+            </a>
+          </article>
         ))
       }
     </div>

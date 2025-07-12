@@ -19,17 +19,18 @@ const gridClass = {
 }[columns];
 ---
 
-<section>
-  <div class={`grid ${gridClass} gap-4 my-8`}>
+<section aria-label="Galeria zdjęć">
+  <div class={`grid ${gridClass} gap-4 my-8`} role="grid" aria-label={`Galeria z ${images.length} zdjęciami`}>
     {
-      images.map((image) => (
-        <div class="relative aspect-square">
+      images.map((image, index) => (
+        <div class="relative aspect-square" role="gridcell">
           {image.href ? (
             <a
               target="_blank"
               rel="noopener noreferrer"
               href={image.href}
-              class="block w-full h-full">
+              class="block w-full h-full"
+              aria-label={`${image.alt} - otwórz w nowej karcie`}>
               <Image
                 alt={image.alt}
                 src={image.src}

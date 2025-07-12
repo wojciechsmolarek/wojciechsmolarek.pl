@@ -3,6 +3,13 @@ import Base from "../../layouts/Base.astro";
 
 const projects = [
   {
+    title: "Projekt strony intenerowej Deni.com.pl",
+    year: 2025,
+    description:
+      "Strona internetowa szwalni tapicerki meblowej w Jarocinie, zawierająca informacje o firmie, ofertę oraz formularz kontaktowy. Strona została stworzona w oparciu o Next.js.",
+    url: "https://deni.com.pl/",
+  },   
+  {
     title: "Projekt strony intenerowej Dev2chola",
     year: 2024,
     description:
@@ -13,7 +20,7 @@ const projects = [
     title: "Projekt strony intenerowej WUSP Jarocin",
     year: 2019,
     description:
-      "Strona internetowa szwalni tapicerki meblowej w Jarocinie.",
+      "Strona internetowa szwalni tapicerki meblowej w Jarocinie. Utworzona w oparciu o Astro.",
     url: "https://wusp-jarocin.pl/",
   },
 ];
@@ -23,30 +30,36 @@ const description = "W moim portfolio znajdziesz projekty, które potwierdzają 
 ---
 
 <Base title={title} description={description}>
-  <section>
-    <h1 class="mb-8 text-2xl font-medium tracking-tight">Zrealizowane projekty</h1>
-    <div class="space-y-6">
+  <section aria-labelledby="projects-heading">
+    <h1 id="projects-heading" class="mb-8 text-2xl font-medium tracking-tight">Zrealizowane projekty</h1>
+    <div class="space-y-6" role="list" aria-label="Lista zrealizowanych projektów">
       {
         projects.map((project, index) => (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block group hover:opacity-80 transition-opacity duration-200">
-            <div class="flex flex-col">
-              <div class="w-full flex justify-between items-baseline">
-                <span class="text-black dark:text-white font-medium tracking-tight">
-                  {project.title}
-                </span>
-                <span class="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                  {project.year}
-                </span>
+          <article role="listitem" class="mb-4">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block group hover:opacity-80 transition-opacity duration-200"
+              aria-label={`${project.title} - otwórz w nowej karcie`}>
+              <div class="flex flex-col">
+                <div class="w-full flex justify-between items-baseline">
+                  <h2 class="text-black dark:text-white font-medium tracking-tight">
+                    {project.title}
+                  </h2>
+                  <time 
+                    class="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm"
+                    datetime={project.year.toString()}
+                    aria-label={`Rok realizacji: ${project.year}`}>
+                    {project.year}
+                  </time>
+                </div>
+                <p class="prose prose-neutral dark:prose-invert pt-3">
+                  {project.description}
+                </p>
               </div>
-              <p class="prose prose-neutral dark:prose-invert pt-3">
-                {project.description}
-              </p>
-            </div>
-          </a>
+            </a>
+          </article>
         ))
       }
     </div>

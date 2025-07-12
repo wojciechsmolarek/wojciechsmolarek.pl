@@ -6,14 +6,14 @@ const title = "Konsultacje SEO";
 ---
 
 <Base title={title}>
-  <section>
-    <h1 class="mb-8 text-2xl font-medium tracking-tight">Konsultacje SEO</h1>
+  <section aria-labelledby="consultations-heading">
+    <h1 id="consultations-heading" class="mb-8 text-2xl font-medium tracking-tight">Konsultacje SEO</h1>
     <article class="prose prose-quoteless prose-neutral dark:prose-invert">
         <p>Potrzebujesz profesjonalnego wsparcia w zakresie SEO, ale nie wiesz od czego zacząć? A może masz konkretny problem z widocznością Twojej strony i szukasz eksperta, który pomoże Ci go rozwiązać? Konsultacje SEO to idealne rozwiązanie, gdy potrzebujesz fachowej porady bez angażowania się w długoterminową współpracę.</p>
   
-        <nav aria-labelledby="Spis treści">
-            <span class="mb-8 text-2xl">Spis treści:</span>
-          <ul>
+        <nav aria-labelledby="table-of-contents-heading">
+            <h2 id="table-of-contents-heading" class="mb-8 text-2xl">Spis treści:</h2>
+          <ul role="list">
             <li><a href="#czym-sa">Czym są konsultacje SEO?</a></li>
             <li><a href="#kiedy-warto">Kiedy warto skorzystać z konsultacji SEO?</a></li>
             <li><a href="#jak-przebiegaja">Jak przebiegają konsultacje SEO?</a></li>
@@ -23,17 +23,17 @@ const title = "Konsultacje SEO";
           </ul>
         </nav>
         
-        <section id="czym-sa">
-          <h2>Czym są konsultacje SEO?</h2>
+        <section id="czym-sa" aria-labelledby="czym-sa-heading">
+          <h2 id="czym-sa-heading">Czym są konsultacje SEO?</h2>
           <p>Konsultacje SEO to spotkania (online lub na żywo), podczas których dzielę się moją wiedzą i doświadczeniem, aby pomóc Ci zrozumieć, co dzieje się z Twoją stroną w wynikach wyszukiwania. To jak wizyta u lekarza specjalisty - przychodzisz z problemem, a ja pomagam zdiagnozować jego przyczynę i proponuję skuteczne rozwiązania.</p>
           
           <p>Podczas konsultacji SEO nie tylko odpowiadam na Twoje pytania, ale również proaktywnie wskazuję obszary, które mogą wymagać poprawy. Wszystko w przystępnej formie, bez technicznego żargonu, który tylko zaciemnia obraz sytuacji.</p>
         </section>
         
-        <section id="kiedy-warto">
-          <h2>Kiedy warto skorzystać z konsultacji SEO?</h2>
+        <section id="kiedy-warto" aria-labelledby="kiedy-warto-heading">
+          <h2 id="kiedy-warto-heading">Kiedy warto skorzystać z konsultacji SEO?</h2>
           <p>Konsultacje SEO sprawdzą się idealnie, gdy:</p>
-          <ul>
+          <ul role="list">
             <li>Zauważyłeś nagły spadek ruchu na swojej stronie</li>
             <li>Planujesz redesign witryny i chcesz uniknąć błędów wpływających na SEO</li>
             <li>Zastanawiasz się, dlaczego konkurencja wyprzedza Cię w wynikach wyszukiwania</li>
@@ -44,9 +44,9 @@ const title = "Konsultacje SEO";
           </ul>
         </section>
         
-        <section id="jak-przebiegaja">
-          <h2>Jak przebiegają konsultacje SEO?</h2>
-          <ol>
+        <section id="jak-przebiegaja" aria-labelledby="jak-przebiegaja-heading">
+          <h2 id="jak-przebiegaja-heading">Jak przebiegają konsultacje SEO?</h2>
+          <ol role="list">
             <li><strong>Przygotowanie</strong> - przed spotkaniem proszę o wypełnienie krótkiej ankiety, która pomoże mi lepiej zrozumieć Twoje potrzeby i problemy.</li>
             <li><strong>Analiza wstępna</strong> - przeglądam Twoją stronę i przygotowuję się do konsultacji, aby maksymalnie wykorzystać wspólny czas.</li>
             <li><strong>Spotkanie</strong> - podczas konsultacji (online lub na żywo) omawiamy problemy, analizujemy dane i szukamy rozwiązań.</li>
@@ -55,9 +55,9 @@ const title = "Konsultacje SEO";
           </ol>
         </section>
         
-        <section id="co-zyskujesz">
-          <h2>Co zyskujesz dzięki konsultacjom SEO?</h2>
-          <ul>
+        <section id="co-zyskujesz" aria-labelledby="co-zyskujesz-heading">
+          <h2 id="co-zyskujesz-heading">Co zyskujesz dzięki konsultacjom SEO?</h2>
+          <ul role="list">
             <li><strong>Oszczędność czasu</strong> - zamiast przedzierać się przez gąszcz informacji w internecie, otrzymujesz konkretne odpowiedzi dostosowane do Twojej sytuacji.</li>
             <li><strong>Oszczędność pieniędzy</strong> - unikasz kosztownych błędów i inwestowania w działania, które nie przyniosą rezultatów.</li>
             <li><strong>Wiedzę</strong> - nie tylko rozwiązujesz bieżący problem, ale również uczysz się, jak unikać podobnych sytuacji w przyszłości.</li>
@@ -66,8 +66,8 @@ const title = "Konsultacje SEO";
           </ul>
         </section>
         
-        <section id="dlaczego-ja">
-          <h2>Dlaczego warto wybrać moje konsultacje SEO?</h2>
+        <section id="dlaczego-ja" aria-labelledby="dlaczego-ja-heading">
+          <h2 id="dlaczego-ja-heading">Dlaczego warto wybrać moje konsultacje SEO?</h2>
           <p>Jako Technical SEO Specialist z doświadczeniem zarówno w agencjach, jak i jako freelancer, łączę szeroką wiedzę techniczną z praktycznym podejściem biznesowym. Nie stosuję uniwersalnych rozwiązań - każda konsultacja jest dostosowana do indywidualnych potrzeb i specyfiki branży.</p>
           
           <p>Lubię tłumaczyć skomplikowane zagadnienia w prosty sposób, bez zbędnego żargonu. Moim celem jest nie tylko rozwiązanie Twojego problemu, ale również przekazanie wiedzy, która pozwoli Ci lepiej zrozumieć, jak działa SEO i jak możesz samodzielnie dbać o widoczność swojej strony.</p>
@@ -75,8 +75,8 @@ const title = "Konsultacje SEO";
           <p>Pracowałem z firmami różnej wielkości - od małych lokalnych biznesów po duże e-commerce - dzięki czemu rozumiem różnorodne wyzwania i potrafię dostosować poziom konsultacji do Twoich potrzeb.</p>
         </section>
         
-        <section id="jak-umowic">
-          <h2>Jak umówić się na konsultacje SEO?</h2>
+        <section id="jak-umowic" aria-labelledby="jak-umowic-heading">
+          <h2 id="jak-umowic-heading">Jak umówić się na konsultacje SEO?</h2>
           <p>Zainteresowany? Świetnie! Wystarczy, że zostawisz wiadomość przez formularz kontaktowy lub napiszesz bezpośrednio na mój adres e-mail. Odpowiem najszybciej jak to możliwe i zaproponuję dogodne terminy spotkania.</p>
           
           <p>Pamiętaj, że dobra widoczność w wyszukiwarkach to nie magia, a efekt przemyślanych działań opartych na wiedzy i doświadczeniu. Skorzystaj z moich konsultacji SEO i zrób pierwszy krok w kierunku lepszych wyników! 🚀</p>

@@ -5,14 +5,14 @@ import { Icon } from "astro-icon/components";
 const YEAR = new Date().getFullYear();
 
 const socialIcons = [
-  { href: socialLinks.github, icon: "fa6-brands:github" },
-  { href: socialLinks.instagram, icon: "fa6-brands:instagram" },
-  { href: socialLinks.linkedin, icon: "fa6-brands:linkedin-in" },
-  { href: socialLinks.email, icon: "tabler:mail-filled" },
+  { href: socialLinks.github, icon: "fa6-brands:github", label: "Profil na GitHub" },
+  { href: socialLinks.instagram, icon: "fa6-brands:instagram", label: "Profil na Instagram" },
+  { href: socialLinks.linkedin, icon: "fa6-brands:linkedin-in", label: "Profil na LinkedIn" },
+  { href: socialLinks.email, icon: "tabler:mail-filled", label: "Wyślij wiadomość na Email" },
 ];
 ---
 
-<footer class="mt-16 lg:mt-24 text-gray-800 dark:text-gray-300 relative">
+<footer class="mt-16 lg:mt-24 text-gray-800 dark:text-gray-300 relative" role="contentinfo">
   <small class="text-right">
     <span>© {YEAR}</span>
     {" "}
@@ -23,7 +23,7 @@ const socialIcons = [
     </span>
   </small>
 
-  <nav class="float-left">
+  <nav class="float-left" aria-label="Linki społecznościowe">
     <ul class="flex text-lg gap-4 duration-300 hover:opacity-90 hover:text-underline">
       {
         socialIcons.map((link) => (
@@ -32,10 +32,11 @@ const socialIcons = [
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={link.href.includes("github") ? "Profil na GitHub" : link.href.includes("instagram") ? "Profil na Instagram" : link.href.includes("linkedin") ? "Profil na LinkedIn" : "Wyślij wiadomość na Email"}
+              aria-label={link.label}
               class="inline-block p-3"
             >
-              <Icon name={link.icon} class="w-6 h-6" />
+              <Icon name={link.icon} class="w-6 h-6" aria-hidden="true" />
+              <span class="sr-only">{link.label}</span>
             </a>
           </li>
         ))

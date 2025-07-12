@@ -21,10 +21,10 @@ const navMenuItems: Record<string, MenuItem> = {
     "/kontakt": { name: "Kontakt" },
 };
 ---
-<nav class="lg:mb-16 mb-12 py-5" aria-label="Menu główne">
+<nav class="lg:mb-16 mb-12 py-5" aria-label="Menu główne" role="navigation">
     <div class="flex flex-col md:flex-row md:items-center justify-between">
         <div class="flex items-center">
-            <a href="/" class="text-3xl font-semibold" aria-label="Strona główna">
+            <a href="/" class="text-3xl font-semibold" aria-label="Strona główna - {metaData.title}">
                 {metaData.title}
             </a>
         </div>
@@ -33,25 +33,31 @@ const navMenuItems: Record<string, MenuItem> = {
                 Object.entries(navMenuItems).map(([key, item]) => {
                   if (item.items) {
                     return (
-                      <div class="relative" key={key}>
+                      <div class="relative">
                         <button 
                             class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500"
                             aria-haspopup="true"
                             aria-expanded="false"
                             aria-label={`Otwórz menu ${item.name}`}
+                            aria-controls={`dropdown-${item.name.toLowerCase()}`}
                         >
                           {item.name}
                            <Icon name="fa6-solid:caret-down" class="ml-1 h-[10px] w-[10px] text-[#1c1c1c] dark:text-[#D4D4D4] align-middle" aria-hidden="true" />
                         </button>
-                        <ul class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg min-w-max"
+                        <ul 
+                            id={`dropdown-${item.name.toLowerCase()}`}
+                            class="absolute hidden z-10 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg min-w-max"
                             aria-label={`Subemnu ${item.name}`}
+                            role="menu"
                         >
                           {item.items.map((subItem, index) => (
-                            <li key={index}>
+                            <li role="none">
                                 <a href={subItem.path} 
                                     class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
                                     aria-label={`Idź do ${subItem.name}`}
                                     rel="prefetch"
+                                    role="menuitem"
+                                    tabindex="-1"
                                 >
                                     {subItem.name}
                                 </a>
@@ -64,7 +70,6 @@ const navMenuItems: Record<string, MenuItem> = {
                     return (
                         <a href={key} class="hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center relative hover:underline" 
                             aria-label={`Idź do ${item.name}`} 
-                            key={key}
                             rel="prefetch">
                             {item.name}
                         </a>
@@ -84,6 +89,9 @@ const navMenuItems: Record<string, MenuItem> = {
             </button>
         </div>
     </div>
+    
+    <!-- Aria live region for theme changes -->
+    <div id="theme-announcement" aria-live="polite" class="sr-only"></div>
 </nav>
 
 <script is:inline define:vars={{ minified: true }}>
@@ -95,6 +103,12 @@ const navMenuItems: Record<string, MenuItem> = {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "dark" ? "light" : "dark";
         setTheme(newTheme);
+        
+        // Announce theme change to screen readers
+        const announcement = document.getElementById('theme-announcement');
+        if (announcement) {
+            announcement.textContent = `Motyw zmieniony na ${newTheme === 'dark' ? 'ciemny' : 'jasny'}`;
+        }
     }
 
     document.addEventListener("astro:page-load", () => {
@@ -110,7 +124,7 @@ const navMenuItems: Record<string, MenuItem> = {
             // Upewnij się, że dropdown istnieje
             if (!dropdown) return;
             
-            const dropdownLinks = dropdown.querySelectorAll('a');
+            const dropdownLinks = dropdown.querySelectorAll('a[role="menuitem"]');
 
             // Dodaj obsługę kliknięcia
             button.addEventListener('click', (e) => {
@@ -124,15 +138,28 @@ const navMenuItems: Record<string, MenuItem> = {
                     if (otherButton !== button) {
                         otherButton.setAttribute('aria-expanded', 'false');
                         otherButton.nextElementSibling?.classList.add('hidden');
+                        // Ukryj wszystkie linki w innych menu
+                        const otherLinks = otherButton.nextElementSibling?.querySelectorAll('a[role="menuitem"]');
+                        otherLinks?.forEach(link => link.setAttribute('tabindex', '-1'));
                     }
                 });
 
                 // Przełącz stan aktualnego menu
                 button.setAttribute('aria-expanded', String(!isExpanded));
                 dropdown.classList.toggle('hidden');
+                
+                // Pokaż/ukryj linki w aktualnym menu
+                dropdownLinks.forEach(link => {
+                    link.setAttribute('tabindex', !isExpanded ? '0' : '-1');
+                });
+                
+                // Przekieruj focus na pierwszy link jeśli menu się otworzyło
+                if (!isExpanded && dropdownLinks.length > 0) {
+                    dropdownLinks[0].focus();
+                }
             });
 
-            // Obsługa nawigacji klawiaturą
+            // Obsługa nawigacji klawiaturą na przycisku
             button.addEventListener('keydown', (e) => {
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
                 
@@ -141,6 +168,7 @@ const navMenuItems: Record<string, MenuItem> = {
                         if (isExpanded) {
                             button.setAttribute('aria-expanded', 'false');
                             dropdown.classList.add('hidden');
+                            dropdownLinks.forEach(link => link.setAttribute('tabindex', '-1'));
                             button.focus();
                         }
                         break;
@@ -149,8 +177,14 @@ const navMenuItems: Record<string, MenuItem> = {
                             e.preventDefault();
                             button.setAttribute('aria-expanded', 'true');
                             dropdown.classList.remove('hidden');
+                            dropdownLinks.forEach(link => link.setAttribute('tabindex', '0'));
                             dropdownLinks[0]?.focus();
                         }
+                        break;
+                    case 'Enter':
+                    case ' ':
+                        e.preventDefault();
+                        button.click();
                         break;
                 }
             });
@@ -161,7 +195,10 @@ const navMenuItems: Record<string, MenuItem> = {
                     switch (e.key) {
                         case 'ArrowDown':
                             e.preventDefault();
-                            dropdownLinks[(index + 1) % dropdownLinks.length]?.focus();
+                            const nextLink = dropdownLinks[(index + 1) % dropdownLinks.length];
+                            if (nextLink) {
+                                nextLink.focus();
+                            }
                             break;
                         case 'ArrowUp':
                             e.preventDefault();
@@ -169,9 +206,23 @@ const navMenuItems: Record<string, MenuItem> = {
                                 button.focus();
                                 button.setAttribute('aria-expanded', 'false');
                                 dropdown.classList.add('hidden');
+                                dropdownLinks.forEach(link => link.setAttribute('tabindex', '-1'));
                             } else {
-                                dropdownLinks[index - 1]?.focus();
+                                dropdownLinks[index - 1].focus();
                             }
+                            break;
+                        case 'Escape':
+                            e.preventDefault();
+                            button.focus();
+                            button.setAttribute('aria-expanded', 'false');
+                            dropdown.classList.add('hidden');
+                            dropdownLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+                            break;
+                        case 'Tab':
+                            // Zamknij menu przy Tab
+                            button.setAttribute('aria-expanded', 'false');
+                            dropdown.classList.add('hidden');
+                            dropdownLinks.forEach(link => link.setAttribute('tabindex', '-1'));
                             break;
                     }
                 });
@@ -184,7 +235,10 @@ const navMenuItems: Record<string, MenuItem> = {
             if (!isClickInsideDropdown) {
                 dropdownButtons.forEach(button => {
                     button.setAttribute('aria-expanded', 'false');
-                    button.nextElementSibling.classList.add('hidden');
+                    const dropdown = button.nextElementSibling;
+                    dropdown.classList.add('hidden');
+                    const links = dropdown.querySelectorAll('a[role="menuitem"]');
+                    links.forEach(link => link.setAttribute('tabindex', '-1'));
                 });
             }
         });

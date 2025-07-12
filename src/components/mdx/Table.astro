@@ -11,21 +11,23 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<table>
-  <thead>
-    <tr class="text-left">
-      {data.headers.map((header) => <th>{header}</th>)}
-    </tr>
-  </thead>
-  <tbody>
-    {
-      data.rows.map((row) => (
-        <tr>
-          {row.map((cell) => (
-            <td>{cell}</td>
-          ))}
-        </tr>
-      ))
-    }
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+  <table role="table" aria-label="Tabela danych">
+    <thead>
+      <tr class="text-left" role="row">
+        {data.headers.map((header) => <th role="columnheader" scope="col">{header}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        data.rows.map((row, rowIndex) => (
+          <tr role="row">
+            {row.map((cell, cellIndex) => (
+              <td role="cell">{cell}</td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

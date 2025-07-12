@@ -49,16 +49,21 @@ const formattedDate = formatDate(post.data.publishedAt);
       },
     })}
   />
-  <section>
-    <h1 class="title mb-3 font-medium text-2xl tracking-tight">
-        {post.data.title}
-    </h1>
-    <div class="flex justify-between items-center mt-2 mb-8 text-medium" >
-      <p class="text-sm text-neutral-600 dark:text-neutral-400" >
-       {formattedDate}
-      </p>
-    </div>
-     <article class="prose prose-quoteless prose-neutral dark:prose-invert">
+  <section aria-labelledby="article-heading">
+    <header>
+      <h1 id="article-heading" class="title mb-3 font-medium text-2xl tracking-tight">
+          {post.data.title}
+      </h1>
+      <div class="flex justify-between items-center mt-2 mb-8 text-medium" >
+        <time 
+          class="text-sm text-neutral-600 dark:text-neutral-400"
+          datetime={post.data.publishedAt.toISOString()}
+          aria-label={`Opublikowano: ${formattedDate}`}>
+         {formattedDate}
+        </time>
+      </div>
+    </header>
+     <article class="prose prose-quoteless prose-neutral dark:prose-invert" aria-labelledby="article-heading">
         <Content />
       </article>
  </section>

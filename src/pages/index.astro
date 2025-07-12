@@ -7,11 +7,11 @@ const description = 'Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptyma
 ---
 
 <Base title={title} description={description}>
-  <section>
+  <section aria-labelledby="main-heading">
     <Picture
       formats={['avif', 'webp']}
       src="/profile-photo.png"
-      alt="Wojciech Smolarek - Technical SEO Specialist oraz freelancer SEO"
+      alt="Wojciech Smolarek - Technical SEO Specialist oraz freelancer SEO z Bydgoszczy"
       class="rounded-full block lg:mt-5 mt-0 lg:mb-5 mb-10 mx-auto sm:float-right sm:ml-5 sm:mb-5"
       width="160"
       height="160"
@@ -20,13 +20,13 @@ const description = 'Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptyma
       quality={75}
     />
   
-    <h1 class="mb-8 text-2xl font-medium tracking-tight">
+    <h1 id="main-heading" class="mb-8 text-2xl font-medium tracking-tight">
       Specjalista ds. technicznego SEO
     </h1>
   
     <div class="prose prose-neutral dark:prose-invert">
       <p>
-        👋 Cześć! Mam na imię Wojciech i cieszę się, że tu jesteś. Na co dzień zajmuję się <strong>technicznym SEO</strong> – to moja praca, ale też coś, co naprawdę mnie fascynuje. Uwielbiam zaglądać “pod maskę” stron internetowych i odkrywać, co można zrobić, żeby działały szybciej, lepiej i były bardziej widoczne w wyszukiwarkach. To trochę jak rozwiązywanie zagadek – każda strona jest inna i wymaga indywidualnego podejścia.
+        👋 Cześć! Mam na imię Wojciech i cieszę się, że tu jesteś. Na co dzień zajmuję się <strong>technicznym SEO</strong> – to moja praca, ale też coś, co naprawdę mnie fascynuje. Uwielbiam zaglądać "pod maskę" stron internetowych i odkrywać, co można zrobić, żeby działały szybciej, lepiej i były bardziej widoczne w wyszukiwarkach. To trochę jak rozwiązywanie zagadek – każda strona jest inna i wymaga indywidualnego podejścia.
       </p>
       <p>
         Obecnie pracuję jako <strong>Technical SEO Specialist w Oponeo.pl</strong>, gdzie dbam o to, żeby użytkownicy mogli łatwo znaleźć to, czego szukają. Ale to nie wszystko – przez lata miałem okazję pracować w różnych agencjach SEO i jako freelancer. Dzięki temu zdobyłem doświadczenie w pracy z wieloma różnymi projektami – od małych lokalnych firm po duże serwisy e-commerce. Działam z Bydgoszczy, ale współpraca zdalna to dla mnie żaden problem.
@@ -36,7 +36,7 @@ const description = 'Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptyma
       <p>
         SEO techniczne to moja specjalność. Pomagam właścicielom stron internetowych poprawić ich widoczność w wyszukiwarkach i wyeliminować problemy techniczne, które mogą ograniczać ich potencjał. Oto kilka rzeczy, którymi mogę się zająć:
       </p> 
-      <ul> 
+      <ul role="list"> 
         <li>Audyt techniczny SEO – znajdowanie problemów, które mogą być niewidoczne na pierwszy rzut oka.</li> 
         <li>Przyspieszanie stron – bo nikt nie lubi czekać na ładowanie witryny.</li> 
         <li>Wdrażanie schema.org – pomaganie robotom wyszukiwarek lepiej rozumieć Twoją treść.</li> 
@@ -55,7 +55,7 @@ const description = 'Potrzebujesz wsparcia w technicznym SEO? Pomogę Ci zoptyma
           SEO to nie tylko moja praca – to coś, co naprawdę lubię robić. Największą satysfakcję daje mi widok wyników: lepsza widoczność strony, więcej odwiedzin i rosnące przychody moich klientów. Jeśli czujesz, że Twoja strona mogłaby osiągnąć więcej, ale coś ją ogranicza – porozmawiajmy! Wspólnie znajdziemy rozwiązania dopasowane do Twoich potrzeb.
         </p> 
         <p>
-          Nie bój się napisać – nawet jeśli dopiero zastanawiasz się nad optymalizacją SEO. Chętnie odpowiem na pytania i pomogę Ci zrozumieć, co można poprawić na Twojej stronie. <a href="mailto:kontakt@wojciechsmolarek.pl">Zostaw wiadomość</a>! 🚀
+          Nie bój się napisać – nawet jeśli dopiero zastanawiasz się nad optymalizacją SEO. Chętnie odpowiem na pytania i pomogę Ci zrozumieć, co można poprawić na Twojej stronie. <a href="mailto:kontakt@wojciechsmolarek.pl" aria-label="Wyślij wiadomość email do Wojciecha Smolarka">Zostaw wiadomość</a>! 🚀
         </p>
     </div>
   </section>
