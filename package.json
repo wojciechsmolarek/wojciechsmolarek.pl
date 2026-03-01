@@ -11,19 +11,19 @@
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.5",
-    "@astrojs/mdx": "^4.3.7",
-    "@astrojs/react": "^4.4.0",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/mdx": "4.3.13",
+    "@astrojs/react": "4.4.2",
+    "@astrojs/rss": "4.0.15",
+    "@astrojs/sitemap": "3.7.0",
     "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/vercel": "^8.2.10",
+    "@astrojs/vercel": "^9.0.4",
     "@fontsource/geist-mono": "^5.1.0",
     "@fontsource/geist-sans": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vercel/routing-utils": "^4.0.0",
-    "astro": "^5.14.7",
+    "astro": "5.18.0",
     "astro-icon": "^1.1.1",
     "astro-opengraph-images": "^1.11.6",
     "astro-seo": "^0.8.4",
@@ -34,7 +34,7 @@
     "katex": "^0.16.11",
     "lenis": "^1.1.14",
     "mdx": "^0.2.3",
-    "npm": "^10.9.2",
+    "npm": "^11.11.0",
     "path-to-regexp": "^8.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -65,6 +65,6 @@
     "rollup": "npm:@rollup/wasm-node"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=20"
   }
 }
